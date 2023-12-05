@@ -1,4 +1,4 @@
-import { hoge } from "./modules/sub";
+import { hoge } from "./modules/sub.js";
 console.log('Hello, TypeScript');
 let ho = new hoge();
 ho.hogehuga("TTT");
