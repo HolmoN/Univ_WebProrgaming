@@ -1,5 +1,4 @@
 import * as Matter from 'matter-js';
-import { BubbleRaw } from "./BubbleRaw";
 const { Engine, Render, Runner } = Matter;
 
 const WIDTH = 420; // 横幅
@@ -42,3 +41,4 @@ window.onload = () => {
   // とりあえず初期化すると思う
   game.init();
 }
+

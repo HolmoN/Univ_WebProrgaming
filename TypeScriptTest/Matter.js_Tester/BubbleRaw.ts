@@ -1,6 +1,6 @@
 import * as Matter from 'matter-js';
 
-class BubbleRaw {
+export class BubbleRaw {
 
   private bubble :Matter.Body;
 
