@@ -26,3 +26,14 @@
         ・1名 エンジニアリング
             ・ローカル環境で動作もできるようにしたいね
             ・とりあえずこの辺どうするかはマジで追々考えたい
+
+・オブジェクトを生成する際の引数は、オブジェクトのタグや名前などの実装も強制させたクラスの方が良いだろうか
+
+・UnUseでエラーが出ないようにする 〇
+    ・https://bobbyhadz.com/blog/typescript-is-declared-but-its-value-is-never-read
+・ターミナルにいちいち権限付与しなくちゃいけない問題
+    ・パワーシェルを管理者権限で実行しコマンドを実行することで解決
+    ・https://rainbow-engine.com/ps-script-execution-disabled/
+・Matter.jsがつかえるよう単体動作テストを行う 
+    ・ファビコンエラー死ね
+    ・https://stackoverflow.com/questions/39149846/why-am-i-seeing-a-404-not-found-error-failed-to-load-favicon-ico-when-not-usin

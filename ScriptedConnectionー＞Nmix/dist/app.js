@@ -1,5 +1,3 @@
-import { hoge } from "./modules/sub.js";
-console.log('Hello, TypeScript');
-let ho = new hoge();
-ho.hogehuga("TTT");
+import Matter from "matter-js";
+let bubble = Matter.Bodies.circle(0, 0, 5);
 //# sourceMappingURL=app.js.map
