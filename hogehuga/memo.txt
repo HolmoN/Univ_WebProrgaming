@@ -1,4 +1,0 @@
-・必要なのはwebpackによるコンパイルだった
-    ・import文に対応していないため
-    ・webpackによるコンパイルで変形する必要があった
-    ・https://qiita.com/EBIHARA_kenji/items/31b7c1c62426bdabd263#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6

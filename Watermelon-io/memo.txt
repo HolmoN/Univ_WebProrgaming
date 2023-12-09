@@ -1,0 +1,61 @@
+/////////////////////////////////////////
+from ScriptedConnection->Nmix
+/////////////////////////////////////////
+・json周りの環境構築
+    ・src,dictで別れるのすごーい
+・コンパイルはtscでできるのか
+・デバッグのやり方
+・tsc -wa
+・importは必要か・・・orz
+・import出来ないならこれを確認せよ
+    ・import指定は.jsになっているか
+    ・コンパイルして変更を反映しているか
+    ・htmlのスクリプト読み込み時、typeをmoduleにしているか
+・ここまでの参照 https://qiita.com/nemutas/items/0a266ec58c76ae3ee43a
+
+・MatterEnvironmentというstaticクラスを作成し、そこにワールド情報を投げる
+    ・Bubbklを生成するといったEnvironmentを必要とする他のクラスは、Environmentモジュールを読み込むことでそれを利用する
+・スクリプトを分けるとモジュール化される関係上、隣接する処理はなるべく一つのコード内に記述する
+    ・可能な限りコンフリクトやエラーを押さえたい所だが・・・
+        ・Git運用でどうにかするしかなさそうか・・・
+・少なくともこのリポジトリは「クライアントの」プログラムのみにしよう
+    ・サーバー含めると・・・死ぬ・・・
+
+・作業分担
+    ・クライアント
+        ・2名 エンジニアリング
+        ・1名 グラフィック
+    ・サーバー
+        ・1名 エンジニアリング
+            ・ローカル環境で動作もできるようにしたいね
+            ・とりあえずこの辺どうするかはマジで追々考えたい
+
+・オブジェクトを生成する際の引数は、オブジェクトのタグや名前などの実装も強制させたクラスの方が良いだろうか
+
+・UnUseでエラーが出ないようにする 〇
+    ・https://bobbyhadz.com/blog/typescript-is-declared-but-its-value-is-never-read
+・ターミナルにいちいち権限付与しなくちゃいけない問題
+    ・パワーシェルを管理者権限で実行しコマンドを実行することで解決
+    ・https://rainbow-engine.com/ps-script-execution-disabled/
+・Matter.jsがつかえるよう単体動作テストを行う 
+    ・ファビコンエラー死ね
+    ・https://stackoverflow.com/questions/39149846/why-am-i-seeing-a-404-not-found-error-failed-to-load-favicon-ico-when-not-usin
+
+/////////////////////////////////////////
+from hogehuga
+/////////////////////////////////////////
+・必要なのはwebpackによるコンパイルだった
+    ・import文に対応していないため
+    ・webpackによるコンパイルで変形する必要があった
+    ・https://qiita.com/EBIHARA_kenji/items/31b7c1c62426bdabd263#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6
+
+/////////////////////////////////////////
+newMemos
+/////////////////////////////////////////
+・static関数として定義されたクラスにおけるpublic, privateメソッドが利用可能かどうかの検証
+    ・一説によると、#で始めたものはprivateになるらしい
+・static変数が定義可能かどうか
+・継承の挙動確認
+・interfaceの代わりをどうするか
+    ・interfacesの中にサンプルを用意している
+・webpackによるjsファイルをまとめる操作を行う

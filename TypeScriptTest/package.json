@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@types/matter-js": "^0.19.5",
-    "axios": "^1.6.2"
-  }
-}
