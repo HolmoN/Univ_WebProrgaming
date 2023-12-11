@@ -19,6 +19,17 @@ eval("/*!\n * matter-js 0.19.0 by @liabru\n * http://brm.io/matter-js/\n * Licen
 
 /***/ }),
 
+/***/ "./src/modules/BubbleRaw.ts":
+/*!**********************************!*\
+  !*** ./src/modules/BubbleRaw.ts ***!
+  \**********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\nvar __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {\n    if (k2 === undefined) k2 = k;\n    var desc = Object.getOwnPropertyDescriptor(m, k);\n    if (!desc || (\"get\" in desc ? !m.__esModule : desc.writable || desc.configurable)) {\n      desc = { enumerable: true, get: function() { return m[k]; } };\n    }\n    Object.defineProperty(o, k2, desc);\n}) : (function(o, m, k, k2) {\n    if (k2 === undefined) k2 = k;\n    o[k2] = m[k];\n}));\nvar __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {\n    Object.defineProperty(o, \"default\", { enumerable: true, value: v });\n}) : function(o, v) {\n    o[\"default\"] = v;\n});\nvar __importStar = (this && this.__importStar) || function (mod) {\n    if (mod && mod.__esModule) return mod;\n    var result = {};\n    if (mod != null) for (var k in mod) if (k !== \"default\" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);\n    __setModuleDefault(result, mod);\n    return result;\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.BubbleRaw = void 0;\nvar Matter = __importStar(__webpack_require__(/*! matter-js */ \"./node_modules/matter-js/build/matter.js\"));\nvar BubbleRaw = /** @class */ (function () {\n    //バブルの定義をする\n    function BubbleRaw(x, y, r) {\n        this.mes = \"ほげ\";\n        this.body = Matter.Bodies.circle(x, y, r);\n    }\n    Object.defineProperty(BubbleRaw.prototype, \"Body\", {\n        ///----------\n        ///プロパティ\n        ///----------\n        get: function () {\n            console.log(this.mes);\n            return this.body;\n        },\n        enumerable: false,\n        configurable: true\n    });\n    return BubbleRaw;\n}());\nexports.BubbleRaw = BubbleRaw;\n\n\n//# sourceURL=webpack://watermelon-io/./src/modules/BubbleRaw.ts?");
+
+/***/ }),
+
 /***/ "./src/modules/MatterEnvironment.ts":
 /*!******************************************!*\
   !*** ./src/modules/MatterEnvironment.ts ***!
@@ -34,10 +45,10 @@ eval("\nvar __createBinding = (this && this.__createBinding) || (Object.create ?
 /*!*********************!*\
   !*** ./src/test.ts ***!
   \*********************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-eval("\nvar __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {\n    if (k2 === undefined) k2 = k;\n    var desc = Object.getOwnPropertyDescriptor(m, k);\n    if (!desc || (\"get\" in desc ? !m.__esModule : desc.writable || desc.configurable)) {\n      desc = { enumerable: true, get: function() { return m[k]; } };\n    }\n    Object.defineProperty(o, k2, desc);\n}) : (function(o, m, k, k2) {\n    if (k2 === undefined) k2 = k;\n    o[k2] = m[k];\n}));\nvar __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {\n    Object.defineProperty(o, \"default\", { enumerable: true, value: v });\n}) : function(o, v) {\n    o[\"default\"] = v;\n});\nvar __importStar = (this && this.__importStar) || function (mod) {\n    if (mod && mod.__esModule) return mod;\n    var result = {};\n    if (mod != null) for (var k in mod) if (k !== \"default\" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);\n    __setModuleDefault(result, mod);\n    return result;\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar Matter = __importStar(__webpack_require__(/*! matter-js */ \"./node_modules/matter-js/build/matter.js\"));\nvar MatterEnvironment_1 = __webpack_require__(/*! ./modules/MatterEnvironment */ \"./src/modules/MatterEnvironment.ts\");\nwindow.onload = function () {\n    console.log(\"gg\");\n    var container = document.querySelector(\".container\");\n    if (container == null)\n        return;\n    var canvas = new MatterEnvironment_1.Canvas(container, 420, 700);\n    MatterEnvironment_1.MatterEnvironment.Init(canvas);\n    container.addEventListener(\"click\", function () {\n        var bubble = Matter.Bodies.circle(MatterEnvironment_1.MatterEnvironment.width / 2, 5, 10);\n        MatterEnvironment_1.MatterEnvironment.Instantiate(bubble);\n    });\n};\n\n\n//# sourceURL=webpack://watermelon-io/./src/test.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar MatterEnvironment_1 = __webpack_require__(/*! ./modules/MatterEnvironment */ \"./src/modules/MatterEnvironment.ts\");\nvar BubbleRaw_1 = __webpack_require__(/*! ./modules/BubbleRaw */ \"./src/modules/BubbleRaw.ts\");\nwindow.onload = function () {\n    console.log(\"gg\");\n    var container = document.querySelector(\".container\");\n    if (container == null)\n        return;\n    var canvas = new MatterEnvironment_1.Canvas(container, 420, 700);\n    MatterEnvironment_1.MatterEnvironment.Init(canvas);\n    container.addEventListener(\"click\", function () {\n        //let bubble: Matter.Body = Matter.Bodies.circle(MatterEnvironment.width/2, 5, 10);\n        var bubble = new BubbleRaw_1.BubbleRaw(MatterEnvironment_1.MatterEnvironment.width / 2, 5, 30);\n        //MatterEnvironment.Instantiate(bubble.Body);\n        var b2 = bubble;\n        MatterEnvironment_1.MatterEnvironment.Instantiate(b2.Body);\n    });\n};\n\n\n//# sourceURL=webpack://watermelon-io/./src/test.ts?");
 
 /***/ })
 
@@ -84,7 +95,7 @@ eval("\nvar __createBinding = (this && this.__createBinding) || (Object.create ?
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = __webpack_require__("./src/test.ts");
 /******/ 	
 /******/ })()
