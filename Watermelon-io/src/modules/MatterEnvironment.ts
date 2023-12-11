@@ -46,7 +46,7 @@ export class MatterEnvironment {
     private static _render: Matter.Render;
     private static _runner: Matter.Runner;
 
-    private static _canvas :Canvas;
+    private static _canvas: Canvas;
 
     private static _isInited: Boolean = false;
 
@@ -90,10 +90,10 @@ export class MatterEnvironment {
 
     //オブジェクトの生成を行う
     //引数を
-    public static Instantiate(body :Matter.Body) {
+    public static Instantiate(body: Matter.Body) {
         //初期化されているかどうかの確認を行う
-        if(!this._isInited){
-            this.IsntInited();
+        if (!this._isInited) {
+            this._IsntInited();
             return;
         }
 
@@ -104,7 +104,7 @@ export class MatterEnvironment {
     //オブジェクトの削除を行う
 
     //初期化されていないときのエラーメッセージを表示する
-    private static IsntInited(){
+    private static _IsntInited() {
         console.error("MatterEnvironmentは初期化されていません");
     }
 }
