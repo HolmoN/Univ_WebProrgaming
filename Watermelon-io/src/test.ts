@@ -12,7 +12,7 @@ window.onload = () => {
 
     container.addEventListener("click", () => {
         //let bubble: Matter.Body = Matter.Bodies.circle(MatterEnvironment.width/2, 5, 10);
-        const bubble :BubbleRaw = new BubbleRaw(MatterEnvironment.width/2, 5, 30);
+        const bubble: BubbleRaw = new BubbleRaw(MatterEnvironment.width / 2, 5, 30);
         //MatterEnvironment.Instantiate(bubble.Body);
 
         const b2 = bubble;
