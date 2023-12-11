@@ -15,7 +15,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
-    "build": "webpack"
+    "build": "webpack",
+    "watch": "webpack --mode development --watch --color --progress",
+    "watch-poll": "npm run watch -- --watch-options-poll=1000"
   },
   "author": "",
   "license": "ISC",
