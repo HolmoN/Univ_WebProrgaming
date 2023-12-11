@@ -7,14 +7,14 @@ mode: 'development', // "production" | "development" | "none"
 
 // メインとなるJavaScriptファイル（エントリーポイント）
 
-entry: './src/index.ts',  //==========本番駆動==========//
-//entry: './src/test.ts',  //==========テスト駆動==========//
+//entry: './src/index.ts',  //==========本番駆動==========//
+entry: './src/test.ts',  //==========テスト駆動==========//
 
 output: {
     path: path.join(__dirname, "dist"),
 
-    filename: "index.js"  //==========本番駆動==========//
-    //filename: "test.js"  //==========テスト駆動==========//
+    //filename: "index.js"  //==========本番駆動==========//
+    filename: "test.js"  //==========テスト駆動==========//
 
 },
 
