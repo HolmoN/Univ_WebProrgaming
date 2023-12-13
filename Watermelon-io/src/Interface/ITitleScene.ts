@@ -1,4 +1,4 @@
-interface ITitleScene{
+export interface ITitleScene{
     /**
      * スタートボタンのオブジェクトを返す
      */
