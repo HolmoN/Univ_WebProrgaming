@@ -60,6 +60,9 @@ export class MatterEnvironment {
     public static get height(): number {
         return this._canvas.height;
     }
+    public static get engine() :Matter.Engine{
+        return this._engine;
+    }
 
     ///----------
     ///メソッド
@@ -75,7 +78,8 @@ export class MatterEnvironment {
             options: {
                 width: canvas.width,
                 height: canvas.height,
-            },
+                wireframes: false
+            }
         });
         this._runner = Matter.Runner.create();
         Matter.Render.run(this._render);
@@ -89,22 +93,24 @@ export class MatterEnvironment {
     }
 
     //オブジェクトの生成を行う
-    //引数を
     public static Instantiate(body :Matter.Body) {
         //初期化されているかどうかの確認を行う
         if(!this._isInited){
-            this.IsntInited();
+            this._IsntInited();
             return;
         }
 
         //オブジェクトの生成をする
-        Matter.Composite.add(this._engine.world, body);
+        Matter.World.add(this._engine.world, body);
     }
 
     //オブジェクトの削除を行う
+    public static Destroy(body :Matter.Body){
+        Matter.World.remove(this._engine.world, body);
+    }
 
     //初期化されていないときのエラーメッセージを表示する
-    private static IsntInited(){
+    private static _IsntInited(){
         console.error("MatterEnvironmentは初期化されていません");
     }
 }
