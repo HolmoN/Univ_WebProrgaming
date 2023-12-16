@@ -31,30 +31,37 @@ export class TestGauge implements IGauge {
         this.height = height;
         this.drawGauge();
     }
-    
+
     //ここで描画
     private drawGauge(): void {
         const gaugeElement = document.querySelector('.main') as HTMLElement;
         if (gaugeElement) {
-            if(this.display){
-            gaugeElement.style.width = `${this.width}px`;
-            gaugeElement.style.height = `${this.height}px`;
-            gaugeElement.style.position = 'relative';
-            gaugeElement.style.border = `${this.borderWidth}px solid black`;
-    
-            const fillHeight = this.fillAmount * (this.height - 2 * this.borderWidth);
-            const fillElement = document.createElement('div');
-            fillElement.style.width = `${this.width - 2 * this.borderWidth}px`;
-            fillElement.style.height = `${fillHeight}px`;
-            fillElement.style.position = 'absolute';
-            fillElement.style.left = `${this.borderWidth}px`;
-            fillElement.style.bottom = `${this.borderWidth}px`;
-    
-            // ゲージの色をFillAmountに応じて変化させるクラスを追加
-            fillElement.classList.add('fill');
-    
-            gaugeElement.innerHTML = '';
-            gaugeElement.appendChild(fillElement);
+            if (this.display) {
+                //可視状態を変更する
+                gaugeElement.style.visibility = "visible";
+
+                gaugeElement.style.width = `${this.width}px`;
+                gaugeElement.style.height = `${this.height}px`;
+                gaugeElement.style.position = 'relative';
+                gaugeElement.style.border = `${this.borderWidth}px solid black`;
+
+                const fillHeight = this.fillAmount * (this.height - 2 * this.borderWidth);
+                const fillElement = document.createElement('div');
+                fillElement.style.width = `${this.width - 2 * this.borderWidth}px`;
+                fillElement.style.height = `${fillHeight}px`;
+                fillElement.style.position = 'absolute';
+                fillElement.style.left = `${this.borderWidth}px`;
+                fillElement.style.bottom = `${this.borderWidth}px`;
+
+                // ゲージの色をFillAmountに応じて変化させるクラスを追加
+                fillElement.classList.add('fill');
+
+                gaugeElement.innerHTML = '';
+                gaugeElement.appendChild(fillElement);
+            }
+            else{
+                //可視状態を変更する
+                gaugeElement.style.visibility = "hidden";
             }
         }
     }
