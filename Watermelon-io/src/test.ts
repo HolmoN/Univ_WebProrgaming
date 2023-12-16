@@ -1,11 +1,11 @@
-import { TestGauge } from "./Gauge";
+import { Gauge } from "./Gauge";
 
 // TestGauge クラスのインスタンスを作成
-const gauge = new TestGauge();
+const gauge = new Gauge();
 
 gauge.setGaugeSize(20, 200);
 
-gauge.Display(true);
+gauge.Display(false);
 
 // テスト用にゲージのランダムな変化を実現する関数
 const updateFillAmount = () => {

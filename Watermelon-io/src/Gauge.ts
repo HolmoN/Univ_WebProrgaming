@@ -1,6 +1,6 @@
 import { IGauge } from "./Interface/IGauge";
 
-export class TestGauge implements IGauge {
+export class Gauge implements IGauge {
     private fillAmount: number;
     private display: boolean;
     private width: number;
@@ -34,7 +34,7 @@ export class TestGauge implements IGauge {
 
     //ここで描画
     private drawGauge(): void {
-        const gaugeElement = document.querySelector('.main') as HTMLElement;
+        const gaugeElement = document.querySelector('.Cgauge') as HTMLElement;
         if (gaugeElement) {
             if (this.display) {
                 //可視状態を変更する
