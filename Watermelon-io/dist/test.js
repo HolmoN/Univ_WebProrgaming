@@ -7,6 +7,7 @@
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./node_modules/matter-js/build/matter.js":
@@ -67,7 +68,7 @@ eval("\nvar __createBinding = (this && this.__createBinding) || (Object.create ?
 /*!*********************!*\
   !*** ./src/test.ts ***!
   \*********************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (() => {
 
 "use strict";
 eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar MatterEnvironment_1 = __webpack_require__(/*! ./modules/MatterEnvironment */ \"./src/modules/MatterEnvironment.ts\");\nvar BubbleRaw_1 = __webpack_require__(/*! ./modules/Bubbles/BubbleRaw */ \"./src/modules/Bubbles/BubbleRaw.ts\");\nvar Walls_1 = __webpack_require__(/*! ./modules/Walls */ \"./src/modules/Walls.ts\");\nvar Bubble_Lv1_1 = __webpack_require__(/*! ./modules/Bubbles/Bubble_Lv1 */ \"./src/modules/Bubbles/Bubble_Lv1.ts\");\nwindow.onload = function () {\n    console.log(\"gg\");\n    var container = document.querySelector(\".container\");\n    if (container == null)\n        return;\n    var canvas = new MatterEnvironment_1.Canvas(container, 420, 700);\n    MatterEnvironment_1.MatterEnvironment.Init(canvas);\n    //壁の生成\n    var walls = new Walls_1.Walls();\n    walls.objects.forEach(function (element) {\n        MatterEnvironment_1.MatterEnvironment.Instantiate(element);\n    });\n    //クリックでボタンの生成\n    container.addEventListener(\"click\", function () {\n        //let bubble: Matter.Body = Matter.Bodies.circle(MatterEnvironment.width/2, 5, 10);\n        var bubble = new BubbleRaw_1.BubbleRaw(MatterEnvironment_1.MatterEnvironment.width / 2 + 50, 5, 30);\n        var bubble2 = new Bubble_Lv1_1.Bubble_Lv1(MatterEnvironment_1.MatterEnvironment.width / 2 - 50, 5);\n        //MatterEnvironment.Instantiate(bubble.Body);\n        var b2 = bubble;\n        MatterEnvironment_1.MatterEnvironment.Instantiate(b2.Body);\n        MatterEnvironment_1.MatterEnvironment.Instantiate(bubble2.Body);\n        console.log(bubble2.Body.render.lineWidth);\n    });\n};\n\n\n//# sourceURL=webpack://watermelon-io/./src/test.ts?");
@@ -76,49 +77,12 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar 
 
 /******/ 	});
 /************************************************************************/
-/******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 		if (cachedModule !== undefined) {
-/******/ 			return cachedModule.exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
-/******/ 			// no module.loaded needed
-/******/ 			exports: {}
-/******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
-/******/ 	})();
-/******/ 	
-/************************************************************************/
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/test.ts");
+/******/ 	var __webpack_exports__ = {};
+/******/ 	__webpack_modules__["./src/test.ts"]();
 /******/ 	
 /******/ })()
 ;
