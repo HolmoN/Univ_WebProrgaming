@@ -11,6 +11,46 @@ import { Bubble_Lv6 } from "./modules/Bubbles/Bubble_Lv6";
 import { Bubble_Lv7 } from "./modules/Bubbles/Bubble_Lv7";
 import { Bubble_Lv8 } from "./modules/Bubbles/Bubble_Lv8";
 
+class preController implements IBubbleController {
+
+    container :HTMLElement | null;
+    bubble: BubbleRaw | undefined;
+    dropped: (() => void) | undefined;
+
+    constructor() {
+        this.container = document.querySelector<HTMLElement>(".container");
+        if (this.container == null) return;
+
+        this.container.addEventListener("click", () => {
+            this.Clicked();
+        });
+    }
+
+    SetBubble(bubble: BubbleRaw, dropped: () => void): void {
+        this.bubble = bubble;
+        this.dropped = dropped;
+
+        if (this.container == null) return;
+        this.container.addEventListener("click", this.Clicked);
+    }
+
+    //瞬間消えてしまう・・・なんで？
+    private Clicked(){
+        if(this.bubble === undefined || this.dropped === undefined) return;
+
+        console.log(this.bubble);
+        console.log(this.dropped);
+
+        this.bubble.Body.position.x = MatterEnvironment.width / 2;
+        this.bubble.Body.position.y = 5;
+        MatterEnvironment.Instantiate(this.bubble.Body);
+        this.dropped();
+        
+        if (this.container == null) return;
+        this.container.removeEventListener("click", this.Clicked);
+    }
+}
+
 class NextBubbles {
     private _nextBubbles: Array<BubbleRaw>; //次に表示されるバブルを予約している
     //Nextの表示期間をここに持たせる
@@ -35,15 +75,14 @@ class NextBubbles {
 }
 
 export class BubbleGenerator {
-    
+
     ///----------
     ///定数
     ///----------
-    private readonly BUBBLE_ESTABLISH : number[][] = [
-        [1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9]
-    ];
+
+    //バブルの生成確立
+    //index=0 : Lv1
+    private readonly BUBBLE_ESTABLISH: number[] = [0.5, 0.3, 0.15, 0.05, 0.0, 0.0, 0.0, 0.0];
 
     ///----------
     ///ローカル変数
@@ -53,10 +92,11 @@ export class BubbleGenerator {
 
     ///----------
     ///メソッド
+
     ///----------
     public constructor() {
         //変数の初期化を行う
-        this._bubbleController = undefined; //TODO: ここに操作機関を入れる
+        this._bubbleController = new preController(); //TODO: ここに操作機関を入れる
         this._nextBubbles = new NextBubbles(
             this._GenerateRandomBubble(),
             this._GenerateRandomBubble(),
@@ -66,7 +106,7 @@ export class BubbleGenerator {
         );
 
         //イベントの登録を行う
-        Matter.Events.on(MatterEnvironment.engine, "collisionStart", this._GetCollision);
+        //Matter.Events.on(MatterEnvironment.engine, "collisionStart", this._GetCollision);
     }
 
     //「上位クラス」「操作機関からのコールバック」
@@ -83,6 +123,8 @@ export class BubbleGenerator {
                 //undefinedだったら、エラーを吐く
                 throw new Error("NextBubbles.Switch() returns undefined.");
             }
+
+            console.log("ほげ"); //ほげの出力回数が指数関数的に増えている・・・？
 
             //操作機関にバブルを送る
             this.SendController(bubble);
@@ -114,69 +156,61 @@ export class BubbleGenerator {
                 const newLevel = currentBubbleLevel + 1;
                 const newX = (bodyA.position.x + bodyB.position.x) / 2;
                 const newY = (bodyA.position.y + bodyB.position.y) / 2;
-                const newRadius = newLevel * 10 + 20;
+
+                console.log("ほげ");
+
+                // バブルの生成
+                this.SetAbsolutePos(this._GenerateBubble(newLevel), newX, newY, false);
             }
         });
-
-        /*
-
-        // ペアごとに処理
-        pairs.forEach((pair) => {
-            if ((pair.bod) || (pair.bodyA === circleB && pair.bodyB === circleA)) {
-                console.log('円が衝突しました！');
-            }
-        });
-
-        for (const pair of pairs) {
-            const { bodyA, bodyB } = pair;
-            if (bodyA.label === bodyB.label && bodyA.label.startsWith("bubble_")) {
-                const currentBubbleLevel = Number(bodyA.label.substring(7)); // この辺めっちゃ雑
-                const newLevel = currentBubbleLevel + 1;
-                const newX = (bodyA.position.x + bodyB.position.x) / 2;
-                const newY = (bodyA.position.y + bodyB.position.y) / 2;
-                const newRadius = newLevel * 10 + 20;
-                const newBubble = Bodies.circle(newX, newY, newRadius, {
-                    label: "bubble_" + newLevel,
-                });
-
-                Composite.remove(this.engine.world, [bodyA, bodyB]);
-                Composite.add(this.engine.world, [newBubble]);
-            }
-        }
-        */
     }
 
     //バブルをランダムで生成する
     private _GenerateRandomBubble(): BubbleRaw {
-        return new BubbleRaw(1, 1, 1);
+        let random = Math.random();
+
+        //BUBBLE_ESTABLISHの確率に従って、indexを決定する
+        let index = 0;
+        for (let i = 0; i < this.BUBBLE_ESTABLISH.length; i++) {
+            let sum = 0;
+            for (let j = 0; j <= i; j++) {
+                sum = this.BUBBLE_ESTABLISH[j];
+            }
+            if (random <= sum) {
+                index = i;
+                break;
+            }
+        }
+
+        return this._GenerateBubble(index);
     }
 
     //任意のレベルのバブルを返す
     private _GenerateBubble(level: number): BubbleRaw {
-        let result : BubbleRaw;
+        let result: BubbleRaw;
         switch (level) {
-            case 1:
+            case 0:
                 result = new Bubble_Lv1(0, 0);
                 break;
-            case 2:
+            case 1:
                 result = new Bubble_Lv2(0, 0);
                 break;
-            case 3:
+            case 2:
                 result = new Bubble_Lv3(0, 0);
                 break;
-            case 4:
+            case 3:
                 result = new Bubble_Lv4(0, 0);
                 break;
-            case 5:
+            case 4:
                 result = new Bubble_Lv5(0, 0);
                 break;
-            case 6:
+            case 5:
                 result = new Bubble_Lv6(0, 0);
                 break;
-            case 7:
+            case 6:
                 result = new Bubble_Lv7(0, 0);
                 break;
-            case 8:
+            case 7:
                 result = new Bubble_Lv8(0, 0);
                 break;
             default:

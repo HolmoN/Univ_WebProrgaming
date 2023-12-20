@@ -3,9 +3,9 @@ import { Canvas, MatterEnvironment } from "./modules/MatterEnvironment";
 import { BubbleRaw } from "./modules/Bubbles/BubbleRaw";
 import { Walls } from "./modules/Walls";
 import { Bubble_Lv1 } from "./modules/Bubbles/Bubble_Lv1";
+import { BubbleGenerator } from "./BubbleGenerator";
 
 window.onload = () => {
-    console.log("gg");
     const container = document.querySelector<HTMLElement>(".container");
     if (container == null) return;
 
@@ -18,6 +18,11 @@ window.onload = () => {
         MatterEnvironment.Instantiate(element);
     });
 
+    const bubbleGenerator = new BubbleGenerator();
+
+    bubbleGenerator.SendController(new Bubble_Lv1(MatterEnvironment.width / 2, 5));
+
+    /*
     //クリックでボタンの生成
     container.addEventListener("click", () => {
         //let bubble: Matter.Body = Matter.Bodies.circle(MatterEnvironment.width/2, 5, 10);
@@ -30,4 +35,5 @@ window.onload = () => {
         MatterEnvironment.Instantiate(bubble2.Body);
         console.log(bubble2.Body.render.lineWidth);
     });
+    */
 }
