@@ -34,15 +34,10 @@ class preController implements IBubbleController {
         this.container.addEventListener("click", this.Clicked);
     }
 
-    //瞬間消えてしまう・・・なんで？
     private Clicked(){
         if(this.bubble === undefined || this.dropped === undefined) return;
 
-        console.log(this.bubble);
-        console.log(this.dropped);
-
-        this.bubble.Body.position.x = MatterEnvironment.width / 2;
-        this.bubble.Body.position.y = 5;
+        this.bubble.SetPosition(this.bubble.x, 50);
         MatterEnvironment.Instantiate(this.bubble.Body);
         this.dropped();
         
@@ -124,8 +119,6 @@ export class BubbleGenerator {
                 throw new Error("NextBubbles.Switch() returns undefined.");
             }
 
-            console.log("ほげ"); //ほげの出力回数が指数関数的に増えている・・・？
-
             //操作機関にバブルを送る
             this.SendController(bubble);
         });
@@ -190,28 +183,28 @@ export class BubbleGenerator {
         let result: BubbleRaw;
         switch (level) {
             case 0:
-                result = new Bubble_Lv1(0, 0);
+                result = new Bubble_Lv1(MatterEnvironment.width/2, 5);
                 break;
             case 1:
-                result = new Bubble_Lv2(0, 0);
+                result = new Bubble_Lv2(MatterEnvironment.width/2, 5);
                 break;
             case 2:
-                result = new Bubble_Lv3(0, 0);
+                result = new Bubble_Lv3(MatterEnvironment.width/2, 5);
                 break;
             case 3:
-                result = new Bubble_Lv4(0, 0);
+                result = new Bubble_Lv4(MatterEnvironment.width/2, 5);
                 break;
             case 4:
-                result = new Bubble_Lv5(0, 0);
+                result = new Bubble_Lv5(MatterEnvironment.width/2, 5);
                 break;
             case 5:
-                result = new Bubble_Lv6(0, 0);
+                result = new Bubble_Lv6(MatterEnvironment.width/2, 5);
                 break;
             case 6:
-                result = new Bubble_Lv7(0, 0);
+                result = new Bubble_Lv7(MatterEnvironment.width/2, 5);
                 break;
             case 7:
-                result = new Bubble_Lv8(0, 0);
+                result = new Bubble_Lv8(MatterEnvironment.width/2, 5);
                 break;
             default:
                 //エラーを吐く
