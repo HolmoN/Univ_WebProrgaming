@@ -17,7 +17,9 @@ export class BubbleRaw {
 
   //バブルの定義をする
   public constructor(x: number, y: number, r: number) {
-    this.body = Matter.Bodies.circle(x, y, r);
+    this.body = Matter.Bodies.circle(x, y, r, {
+      label: "bubble_",
+    });
     this.body.render.fillStyle = "blue";
   }
 

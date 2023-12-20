@@ -13,7 +13,7 @@ window.onload = () => {
     MatterEnvironment.Init(canvas);
 
     //壁の生成
-    const walls :Walls = new Walls();
+    const walls: Walls = new Walls();
     walls.objects.forEach(element => {
         MatterEnvironment.Instantiate(element);
     });
