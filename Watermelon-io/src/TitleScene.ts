@@ -3,7 +3,7 @@ export class TitleScene implements ITitleScene {
 
     private _buttonElement: HTMLButtonElement;
     private _matchingText: HTMLElement;
-    private _bgElement : HTMLElement;
+   
 
     /**
      * スタートボタンのオブジェクトを返す
@@ -16,7 +16,7 @@ export class TitleScene implements ITitleScene {
         // HTML要素の取得
         this._buttonElement = document.getElementById('start') as HTMLButtonElement;
         this._matchingText = document.getElementById('matchingText') as HTMLElement;
-        this._bgElement = document.getElementById('bg') as HTMLElement;
+       
 
 
         // クリックイベントのリスナーを登録
@@ -27,17 +27,6 @@ export class TitleScene implements ITitleScene {
 
             //マッチングを開始する
             this._matchingText.style.display = 'block';
-
-            // 仮にここでマッチング処理を行うと仮定
-            // マッチングの結果を受け取り、Matchedメソッドに渡す
-            // ここではsetTimeoutを使用して2秒後にマッチングの結果を受け取ったものと仮定
-            setTimeout(() => {
-                const matched = false; // 仮のマッチング結果
-
-                // マッチング結果を処理
-                this.Matched(matched);
-            }, 2000);
-
 
 
         });
@@ -53,12 +42,14 @@ export class TitleScene implements ITitleScene {
      */
     public Display(display: boolean): void {
 
-        if (this._bgElement) {
+        if (this._buttonElement && this._matchingText) {
             if (!display) {
-                // マッチングが成功した場合はすべて非表示にする
-                this._bgElement.style.visibility = "hidden";
+                // display = falseはすべて非表示にする
+                this._buttonElement.style.visibility = "hidden";
+                this._matchingText.style.visibility = "hidden";
+
             } else {
-                // マッチングが成功していない場合はボタンを表示
+                
                 
             }
         }
@@ -74,7 +65,7 @@ export class TitleScene implements ITitleScene {
 
                 // マッチング結果に基づいて画像ボタンを再描写
 
-                this._buttonElement.className = "example";
+                this._buttonElement.className = "start";
                 this._matchingText.style.display = 'none';
 
 
