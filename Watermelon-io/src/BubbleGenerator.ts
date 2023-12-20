@@ -33,20 +33,25 @@ export class BubbleGenerator{
     ///メソッド
     ///----------
     public constructor(){
-
+        //イベントの設定などを行う
     }
 
-    //「上位クラス」「」
-    //バブルを生成し、操作機関に送る
+    //「上位クラス」「操作機関からのコールバック」
+    //によって、この処理が呼ばれることを想定している
+    //バブルを操作機関に送るだけ
     public SendController(bubble :BubbleRaw){
 
     }
     
-
     //「通信」「接触判定」
     //によって、この処理が呼ばれることを想定している
-    //バブルを絶対位置で配置する
+    //バブルを絶対位置で配置するだけ
     public SetAbsolutePos(bubble :BubbleRaw, x :number, y :number, isKinematic :boolean){
+
+    }
+
+    //接触判定を取る
+    private _GetCollision(){
 
     }
 
