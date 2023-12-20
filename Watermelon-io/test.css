@@ -1,19 +1,20 @@
 
-.main{
+.main {
     display: flex;
     align-items: center;
     justify-content: center;
-     /*コレ*/position: relative;
+    position: relative;
+    background: url('bgimg_test.png');
     
 }
 .example button{
     display: block;
    
     
-     /*コレ*/position: absolute;
-    /*コレ*/top: 80%;
-    /*コレ*/left: 50%;
-    /*コレ*/transform: translateY(-50%) translateX(-50%);
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
 
     width: 20%;
     text-align: center;
@@ -29,8 +30,8 @@
     display:none;
 }
 
+/*
 body{
     background: url('bgimg_test.png');
 }
-
- 
+*/

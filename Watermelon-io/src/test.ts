@@ -3,6 +3,6 @@ window.onload = () =>
 {
    let testscene = new TitleScene();
 
-   testscene.StartButton;
-   //testscene.Matched(false);
+   //testscene.StartButton;
+   testscene.Display(false);
 }

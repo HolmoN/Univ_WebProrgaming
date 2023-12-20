@@ -3,6 +3,7 @@ export class TitleScene implements ITitleScene {
 
     private _buttonElement: HTMLButtonElement;
     private _matchingText: HTMLElement;
+    private _bgElement : HTMLElement;
 
     /**
      * スタートボタンのオブジェクトを返す
@@ -15,7 +16,7 @@ export class TitleScene implements ITitleScene {
         // HTML要素の取得
         this._buttonElement = document.getElementById('start') as HTMLButtonElement;
         this._matchingText = document.getElementById('matchingText') as HTMLElement;
-
+        this._bgElement = document.getElementById('bg') as HTMLElement;
 
 
         // クリックイベントのリスナーを登録
@@ -50,12 +51,16 @@ export class TitleScene implements ITitleScene {
     /**
      * 画面を描写するかを切り替える
      */
-    Display(display: boolean): void {
-        if (display = true) {
+    public Display(display: boolean): void {
 
-        }
-        else {
-
+        if (this._bgElement) {
+            if (!display) {
+                // マッチングが成功した場合はすべて非表示にする
+                this._bgElement.style.visibility = "hidden";
+            } else {
+                // マッチングが成功していない場合はボタンを表示
+                
+            }
         }
     }
 
@@ -74,9 +79,10 @@ export class TitleScene implements ITitleScene {
 
 
             }
-        }
-        else {
 
+            else {
+
+            }
         }
     }
 }
