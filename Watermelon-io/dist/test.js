@@ -16,7 +16,7 @@
   \*********************/
 /***/ (() => {
 
-eval("\nwindow.onload = function () {\n};\n\n\n//# sourceURL=webpack://watermelon-io/./src/test.ts?");
+eval("\n\n\n//# sourceURL=webpack://watermelon-io/./src/test.ts?");
 
 /***/ })
 

@@ -1,6 +1,6 @@
-interface IGauge{
+export interface IGauge{
     /**
-     * 画面を描写するかを切り替える
+     * すべてを描写するかを切り替える
      */
     Display(display :boolean) :void;
 
@@ -10,4 +10,9 @@ interface IGauge{
      * オーバー、アンダーフローした場合は0~1の間になるようにする
      */
     set FillAmount(value :number);
+
+    /**
+     * ゲージのSizeを設定する
+     */
+    setGaugeSize(width: number, height: number): void;
 }

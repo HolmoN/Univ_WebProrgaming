@@ -1,4 +1,4 @@
-interface IScene{
+export interface IScene{
     /**
      * 画面を描写するかを切り替える
      */

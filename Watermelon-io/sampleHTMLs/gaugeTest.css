@@ -1,0 +1,22 @@
+
+/* ゲージの色をFillAmountに応じて変化させたいんだけどなりません*/
+.Cgauge {
+    background-color: white;
+    border: solid purple !important; /* 外枠の色を紫に設定 */
+    position: relative;
+    overflow: hidden;
+}
+
+.Cgauge .fill {
+    position: absolute;
+    bottom: 100px;
+    left: 2px;
+    right: 2px;
+    top: auto;
+    background-color: rgb(77, 77, 222); /* デフォルトの色は青 */
+}
+
+.Cgauge .fill.full {
+    background-color: rgb(102, 0, 123); /* FillAmountが1に近づくにつれて紫に変化 */
+}
+
