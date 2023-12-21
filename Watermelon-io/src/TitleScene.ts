@@ -3,7 +3,7 @@ export class TitleScene implements ITitleScene {
 
     private _buttonElement: HTMLButtonElement;
     private _matchingText: HTMLElement;
-   
+
 
     /**
      * スタートボタンのオブジェクトを返す
@@ -16,7 +16,7 @@ export class TitleScene implements ITitleScene {
         // HTML要素の取得
         this._buttonElement = document.getElementById('start') as HTMLButtonElement;
         this._matchingText = document.getElementById('matchingText') as HTMLElement;
-       
+
 
 
         // クリックイベントのリスナーを登録
@@ -49,8 +49,8 @@ export class TitleScene implements ITitleScene {
                 this._matchingText.style.visibility = "hidden";
 
             } else {
-                
-                
+
+
             }
         }
     }
