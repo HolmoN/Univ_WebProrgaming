@@ -1,5 +1,5 @@
 import * as Matter from 'matter-js';
-interface INext{
+export interface INext{
     /**
      * 画面を描写するかを切り替える
      */
