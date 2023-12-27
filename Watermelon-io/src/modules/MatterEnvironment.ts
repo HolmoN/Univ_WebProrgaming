@@ -63,6 +63,9 @@ export class MatterEnvironment {
     public static get engine() :Matter.Engine{
         return this._engine;
     }
+    public static get canvas() :Canvas{
+        return this._canvas;
+    }
 
     ///----------
     ///メソッド

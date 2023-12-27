@@ -1,4 +1,4 @@
-interface IMouseInput{
+export interface IMouseInput{
     //マウスの右クリック入力イベントをコールバックする
     RightMousePressed(callback: (x :number, y :number) => void) :void;
 

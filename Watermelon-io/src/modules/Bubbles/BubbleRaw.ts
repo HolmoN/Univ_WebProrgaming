@@ -39,6 +39,11 @@ export class BubbleRaw {
     Matter.Body.setPosition(this.body, {x, y});
   }
 
+  //静的設定
+  public SetStatic(isStatic: boolean){
+    this.body.isStatic = isStatic;
+  }
+
   //衝突処理はここでは行わない
   //より上位のクラスで行うものとする
 }
