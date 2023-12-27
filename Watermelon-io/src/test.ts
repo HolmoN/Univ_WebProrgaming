@@ -9,7 +9,7 @@ window.onload = () => {
         const next = new Next();
 
         // ゲージの表示を有効にする
-        next.Display(false);
+        next.Display(true);
 
         // テスト用データ（画像パス）を指定
         const nextImages = [
