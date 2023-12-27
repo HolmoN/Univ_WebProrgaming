@@ -47,8 +47,13 @@ class preController implements IBubbleController {
 }
 
 class NextBubbles {
-    private _nextBubbles: Array<BubbleRaw>; //次に表示されるバブルを予約している
-    //Nextの表示期間をここに持たせる
+    //次に表示されるバブルを予約している
+    private _nextBubbles: Array<BubbleRaw>; 
+    //_nextBubblesのgetter
+    public get nextBubbles(): Array<BubbleRaw> {
+        return this._nextBubbles;
+    }
+    
 
     //NextGUIをコンストラクタ―の引数でもらう
     public constructor(...bubbles: BubbleRaw[]) {
@@ -61,7 +66,7 @@ class NextBubbles {
 
     //Nextの内容物を更新する
     public Switch(bubble: BubbleRaw): BubbleRaw | undefined {
-        let result = this._nextBubbles.pop();
+        let result = this._nextBubbles.shift();
         this._nextBubbles.push(bubble);
         //NextGUIの更新処理を行う
 
@@ -101,13 +106,20 @@ export class BubbleGenerator {
         );
 
         //イベントの登録を行う
-        //Matter.Events.on(MatterEnvironment.engine, "collisionStart", this._GetCollision);
+        Matter.Events.on(MatterEnvironment.engine, "collisionStart", (ev) => this._GetCollision(ev));
     }
 
     //「上位クラス」「操作機関からのコールバック」
     //によって、この処理が呼ばれることを想定している
     //バブルを操作機関に送るだけ
     public SendController(bubble: BubbleRaw) {
+
+        let lab = "";
+        this._nextBubbles.nextBubbles.forEach(elem => {
+            lab += elem.Body.label + ", ";
+        });
+        console.log("NextBubbles : " + lab);
+
         //操作機関にバブルを送る
         this._bubbleController?.SetBubble(bubble, () => {
             //バブルを生成し、Nextの内容物を更新する
@@ -129,8 +141,7 @@ export class BubbleGenerator {
     //バブルを絶対位置で配置するだけ
     public SetAbsolutePos(bubble: BubbleRaw, x: number, y: number, isStatic: boolean) {
         //バブルを絶対位置に設定する
-        bubble.Body.position.x = x;
-        bubble.Body.position.y = y;
+        bubble.SetPosition(x, y);
         bubble.Body.isStatic = isStatic;
 
         //バブルを環境に生成する
@@ -148,11 +159,16 @@ export class BubbleGenerator {
                 const currentBubbleLevel = Number(bodyA.label.replace("bubble_", ''));
                 const newLevel = currentBubbleLevel + 1;
                 const newX = (bodyA.position.x + bodyB.position.x) / 2;
-                const newY = (bodyA.position.y + bodyB.position.y) / 2;
+                const newY = (bodyA.position.y + bodyB.position.y) / 2 -50;
 
                 console.log("ほげ");
 
-                // バブルの生成
+                // 2つのバブルを破壊
+                MatterEnvironment.Destroy(bodyA);
+                MatterEnvironment.Destroy(bodyB);
+
+                //次のバブルのレベルが上限を超えていなければ、バブルを生成する
+                if (newLevel >= this.BUBBLE_ESTABLISH.length) return;
                 this.SetAbsolutePos(this._GenerateBubble(newLevel), newX, newY, false);
             }
         });
@@ -167,7 +183,7 @@ export class BubbleGenerator {
         for (let i = 0; i < this.BUBBLE_ESTABLISH.length; i++) {
             let sum = 0;
             for (let j = 0; j <= i; j++) {
-                sum = this.BUBBLE_ESTABLISH[j];
+                sum += this.BUBBLE_ESTABLISH[j];
             }
             if (random <= sum) {
                 index = i;
@@ -210,6 +226,8 @@ export class BubbleGenerator {
                 //エラーを吐く
                 throw new Error("BubbleGenerator._GenerateBubble() : level is out of range.");
         }
+
+        console.log(result.Body.label + " is generated.");
         return result;
     }
 }
