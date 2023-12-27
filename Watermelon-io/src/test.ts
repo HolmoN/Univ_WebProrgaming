@@ -20,7 +20,8 @@ window.onload = () => {
 
    const bubbleGenerator = new BubbleGenerator();
 
-   bubbleGenerator.SendController(new Bubble_Lv1(MatterEnvironment.width / 2, 5));
+   let nextBubble  = bubbleGenerator.NextBubble;
+   if(nextBubble != undefined) bubbleGenerator.SendController(nextBubble);
 
 
    //クリックでボタンの生成

@@ -10,36 +10,36 @@ import { Bubble_Lv5 } from "./modules/Bubbles/Bubble_Lv5";
 import { Bubble_Lv6 } from "./modules/Bubbles/Bubble_Lv6";
 import { Bubble_Lv7 } from "./modules/Bubbles/Bubble_Lv7";
 import { Bubble_Lv8 } from "./modules/Bubbles/Bubble_Lv8";
+import { Tasks } from "./modules/Tasks";
+import { BubbleController } from "./modules/BubbleController";
 
 class preController implements IBubbleController {
 
     container :HTMLElement | null;
     bubble: BubbleRaw | undefined;
-    dropped: (() => void) | undefined;
+    drop: ((retBubble :BubbleRaw) => void) | undefined;
 
     constructor() {
         this.container = document.querySelector<HTMLElement>(".container");
         if (this.container == null) return;
 
-        this.container.addEventListener("click", () => {
+        this.container.addEventListener("click", (retBubble) => {
             this.Clicked();
         });
     }
 
-    SetBubble(bubble: BubbleRaw, dropped: () => void): void {
+    UpdateBubble(bubble: BubbleRaw, drop: (retBubble :BubbleRaw) => void): void {
         this.bubble = bubble;
-        this.dropped = dropped;
+        this.drop = drop;
 
         if (this.container == null) return;
         this.container.addEventListener("click", this.Clicked);
     }
 
     private Clicked(){
-        if(this.bubble === undefined || this.dropped === undefined) return;
+        if(this.bubble === undefined || this.drop === undefined) return;
 
-        this.bubble.SetPosition(this.bubble.x, 50);
-        MatterEnvironment.Instantiate(this.bubble.Body);
-        this.dropped();
+        this.drop(this.bubble);
         
         if (this.container == null) return;
         this.container.removeEventListener("click", this.Clicked);
@@ -72,6 +72,15 @@ class NextBubbles {
 
         return result;
     }
+
+    //中身を全てconsole.log()で出力する
+    public Log() {
+        let lab = "";
+        this._nextBubbles.forEach(elem => {
+            lab += elem.Body.label + ", ";
+        });
+        console.log("NextBubbles : " + lab);
+    }
 }
 
 export class BubbleGenerator {
@@ -83,6 +92,16 @@ export class BubbleGenerator {
     //バブルの生成確立
     //index=0 : Lv1
     private readonly BUBBLE_ESTABLISH: number[] = [0.5, 0.3, 0.15, 0.05, 0.0, 0.0, 0.0, 0.0];
+    
+    //バブルを落としてから、次のバブルが生成されるまでの時間(ms)
+    private readonly BUBBLE_GENE_INTERVAL: number = 200;
+
+    ///----------
+    ///プロパティ
+    ///----------
+    public get NextBubble(): BubbleRaw | undefined {
+        return this._nextBubbles.Switch(this._GenerateRandomBubble());
+    }
 
     ///----------
     ///ローカル変数
@@ -92,11 +111,10 @@ export class BubbleGenerator {
 
     ///----------
     ///メソッド
-
     ///----------
     public constructor() {
         //変数の初期化を行う
-        this._bubbleController = new preController(); //TODO: ここに操作機関を入れる
+        this._bubbleController = new BubbleController(); //TODO: 捜査機関を変えられるようにしておく
         this._nextBubbles = new NextBubbles(
             this._GenerateRandomBubble(),
             this._GenerateRandomBubble(),
@@ -113,26 +131,30 @@ export class BubbleGenerator {
     //によって、この処理が呼ばれることを想定している
     //バブルを操作機関に送るだけ
     public SendController(bubble: BubbleRaw) {
+        //NextBubblesの内容物を確認する
+        this._nextBubbles.Log();
 
-        let lab = "";
-        this._nextBubbles.nextBubbles.forEach(elem => {
-            lab += elem.Body.label + ", ";
-        });
-        console.log("NextBubbles : " + lab);
+        //バブルを生成する
+        bubble.SetStatic(true);
+        MatterEnvironment.Instantiate(bubble.Body);
 
         //操作機関にバブルを送る
-        this._bubbleController?.SetBubble(bubble, () => {
-            //バブルを生成し、Nextの内容物を更新する
-            let bubble = this._nextBubbles.Switch(this._GenerateRandomBubble());
+        this._bubbleController?.UpdateBubble(bubble, async (retBubble) => {
+            //バブルを落とす
+            retBubble.SetStatic(false);
 
-            //bubbleがundefinedじゃないことを確認する
+            //次のバブルを取得する
+            let bubble = this.NextBubble;
             if (bubble === undefined) {
                 //undefinedだったら、エラーを吐く
                 throw new Error("NextBubbles.Switch() returns undefined.");
             }
 
+            await Tasks.sleep(this.BUBBLE_GENE_INTERVAL);
+
             //操作機関にバブルを送る
             this.SendController(bubble);
+            
         });
     }
 
@@ -160,8 +182,6 @@ export class BubbleGenerator {
                 const newLevel = currentBubbleLevel + 1;
                 const newX = (bodyA.position.x + bodyB.position.x) / 2;
                 const newY = (bodyA.position.y + bodyB.position.y) / 2 -50;
-
-                console.log("ほげ");
 
                 // 2つのバブルを破壊
                 MatterEnvironment.Destroy(bodyA);
@@ -227,7 +247,7 @@ export class BubbleGenerator {
                 throw new Error("BubbleGenerator._GenerateBubble() : level is out of range.");
         }
 
-        console.log(result.Body.label + " is generated.");
+        //console.log(result.Body.label + " is generated.");
         return result;
     }
 }
