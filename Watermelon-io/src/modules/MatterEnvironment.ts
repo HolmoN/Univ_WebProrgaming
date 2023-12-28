@@ -110,7 +110,27 @@ export class MatterEnvironment {
 
     //オブジェクトの削除を行う
     public static Destroy(body :Matter.Body){
+        //初期化されているかどうかの確認を行う
+        if(!this._isInited){
+            this._IsntInited();
+            return [];
+        }
+
         Matter.World.remove(this._engine.world, body);
+    }
+
+    //タグによってオブジェクトの検索を行う
+    public static FindByTag(tag :string) :Matter.Body[]{
+        //初期化されているかどうかの確認を行う
+        if(!this._isInited){
+            this._IsntInited();
+            return [];
+        }
+
+        //タグによってオブジェクトの検索を行う
+        return Matter.Composite.allBodies(this._engine.world).filter((body) => {
+            return body.label.includes(tag);
+        });
     }
 
     //初期化されていないときのエラーメッセージを表示する
