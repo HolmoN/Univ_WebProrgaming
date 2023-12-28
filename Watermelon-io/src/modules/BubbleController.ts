@@ -115,7 +115,10 @@ export class BubbleController implements IBubbleController {
     }
 
     //バブルとコールバックを外部からセットする
-    UpdateBubble(bubble: BubbleRaw, drop: (retBubble :BubbleRaw) => void): void {
+    UpdateBubble(bubble: BubbleRaw | undefined, drop: (retBubble :BubbleRaw) => void): void {
+        //古いバブルを持っている場合は、破棄する
+        if(this._bubble?.Body.isStatic == true) MatterEnvironment.Destroy(this._bubble.Body);
+
         this._bubble = bubble;
         this._drop = drop;
     }
@@ -123,8 +126,8 @@ export class BubbleController implements IBubbleController {
     private _MouseDragged(x: number){
         //ドラッグ可能状態でなければ何もしない
         if(!this.draggable) return;
-
-        console.log(x);
+        
+        //console.log(x);
 
         //バブルを移動させる
         if(this._bubble === undefined) return;

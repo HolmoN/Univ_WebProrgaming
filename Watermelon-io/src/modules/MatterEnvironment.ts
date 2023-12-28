@@ -81,6 +81,7 @@ export class MatterEnvironment {
             options: {
                 width: canvas.width,
                 height: canvas.height,
+                background: 'transparent',
                 wireframes: false
             }
         });
