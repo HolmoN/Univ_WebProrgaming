@@ -50,7 +50,7 @@ export class Next implements INext {
         // 各窓に対して処理を行う
         for (let i = 0; i < 5; i++) {
             const windowDiv = windows[i] as HTMLDivElement;
-            const imagePath = "../img/NextTest/" + nexts[i].toString(); 
+            const imagePath = nexts[i]; 
 
             // 各窓内のバブル（画像要素）を取得
             const bubble = windowDiv.querySelector(".bubble") as HTMLImageElement;

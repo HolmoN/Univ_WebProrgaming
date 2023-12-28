@@ -3,11 +3,15 @@ import { BubbleRaw } from './BubbleRaw';
 export class Bubble_Lv4 extends BubbleRaw {
     //バブルの定義をする
     public constructor(x: number, y: number) {
-        super(x, y, 45);
-        this.body.label = "bubble_4";
-
-        //画像の貼り付けを行う
-        //this.body.render.sprite = ;
-        this.body.render.fillStyle = "green";
+        super(x, y, 45, {
+            label: "bubble_4",
+            render: {
+                sprite: {
+                    texture: 'img/NextTest2/lv4.png',
+                    xScale: 2,
+                    yScale: 2
+                }
+            }
+        });
     }
 }

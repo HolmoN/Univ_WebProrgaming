@@ -27,20 +27,28 @@ export class BubbleRaw {
   ///----------
 
   //バブルの定義をする
-  public constructor(x: number, y: number, r: number) {
-    this.body = Matter.Bodies.circle(x, y, r, {
-      label: "bubble_",
-    });
-    this.body.render.fillStyle = "blue";
+  public constructor(x: number, y: number, r: number, definition: Matter.IBodyDefinition | undefined) {
+    if (definition) {
+      this.body = Matter.Bodies.circle(x, y, r, definition);
+    }
+    else {
+      this.body = Matter.Bodies.circle(x, y, r, {
+        label: "bubble_",
+        render: {
+          fillStyle: 'red',
+        }
+      });
+    }
+
   }
 
   //バブルの位置をセットする
-  public SetPosition(x: number, y:number){
-    Matter.Body.setPosition(this.body, {x, y});
+  public SetPosition(x: number, y: number) {
+    Matter.Body.setPosition(this.body, { x, y });
   }
 
   //静的設定
-  public SetStatic(isStatic: boolean){
+  public SetStatic(isStatic: boolean) {
     this.body.isStatic = isStatic;
   }
 
