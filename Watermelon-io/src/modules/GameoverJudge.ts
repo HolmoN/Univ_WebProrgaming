@@ -7,7 +7,7 @@ export class GameoverArea {
     ///定数
     ///----------
     private readonly GAMEOVER_TIME: number = 3000; //ゲームオーバーになるまでの時間(ms)
-    private readonly PROGRESS_TIME: number = 10; //ゲームオーバーになるまでの時間(ms)
+    private readonly TICKRATE: number = 10; //ゲームオーバーになるまでの時間(ms)
 
     ///----------
     /// メンバ変数
@@ -15,7 +15,7 @@ export class GameoverArea {
     private _gameOver: (() => void);
     private _boundary: Matter.Body;
 
-    private _progressCounter = 0;
+    private _tickCounter = 0;
 
     ///----------
     ///プロパティ
@@ -47,7 +47,7 @@ export class GameoverArea {
 
     public SetCallBack(gameOver: (() => void) | undefined) {
         Matter.Events.off(MatterEnvironment.engine, 'afterUpdate', () => { this._ObserveEntryBody(); });
-        this. _progressCounter = 0;
+        this. _tickCounter = 0;
 
         //コールバックが渡されている場合は、イベントの登録を行う
         if (gameOver != undefined) {
@@ -59,9 +59,9 @@ export class GameoverArea {
 
     private _ObserveEntryBody() {
         //計算回数を減らす
-        this._progressCounter++;
-        if(this._progressCounter < this.PROGRESS_TIME) return;
-        this._progressCounter = 0;
+        this._tickCounter++;
+        if(this._tickCounter < this.TICKRATE) return;
+        this._tickCounter = 0;
 
         // World内のすべてのバブルを取得
         const bodies = MatterEnvironment.FindByTag("bubble_");
