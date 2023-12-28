@@ -1,3 +1,4 @@
+/*
 import Matter from "matter-js";
 import { Canvas, MatterEnvironment } from "./modules/MatterEnvironment";
 import { BubbleRaw } from "./modules/Bubbles/BubbleRaw";
@@ -42,3 +43,4 @@ window.onload = () => {
    });
 
 }
+*/
