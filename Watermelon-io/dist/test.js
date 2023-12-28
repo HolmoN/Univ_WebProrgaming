@@ -26,7 +26,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexpo
   \*********************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar Gauge_1 = __webpack_require__(/*! ./Gauge */ \"./src/Gauge.ts\");\n// TestGauge クラスのインスタンスを作成\nvar gauge = new Gauge_1.TestGauge();\ngauge.setGaugeSize(20, 200);\ngauge.Display(true);\n// テスト用にゲージのランダムな変化を実現する関数\nvar updateFillAmount = function () {\n    var newFillAmount = Math.random() * 3 - 1;\n    gauge.FillAmount = newFillAmount;\n    console.log('Updated FillAmount:', newFillAmount);\n};\n// （テスト用）500ミリ秒ごとにゲージのフィル量を変更\nsetInterval(updateFillAmount, 500);\n\n\n//# sourceURL=webpack://watermelon-io/./src/test.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar Gauge_1 = __webpack_require__(/*! ./Gauge */ \"./src/Gauge.ts\");\n// TestGauge クラスのインスタンスを作成\nvar gauge = new Gauge_1.TestGauge();\ngauge.setGaugeSize(20, 200);\ngauge.Display(true);\ngauge.FillAmount = 0.5;\n// テスト用にゲージのランダムな変化を実現する関数\nvar updateFillAmount = function () {\n    var newFillAmount = Math.random() * 3 - 1;\n    gauge.FillAmount = newFillAmount;\n    console.log('Updated FillAmount:', newFillAmount);\n};\n// （テスト用）500ミリ秒ごとにゲージのフィル量を変更\nsetInterval(updateFillAmount, 500);\n\n\n//# sourceURL=webpack://watermelon-io/./src/test.ts?");
 
 /***/ })
 

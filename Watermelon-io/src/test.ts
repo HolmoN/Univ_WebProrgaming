@@ -7,6 +7,8 @@ gauge.setGaugeSize(20, 200);
 
 gauge.Display(true);
 
+gauge.FillAmount = 0.5;
+
 // テスト用にゲージのランダムな変化を実現する関数
 const updateFillAmount = () => {
     const newFillAmount = Math.random() * 3 - 1;
