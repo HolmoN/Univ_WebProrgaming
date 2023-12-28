@@ -7,6 +7,7 @@
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/Next.ts":
@@ -23,7 +24,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexpo
 /*!*********************!*\
   !*** ./src/test.ts ***!
   \*********************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (() => {
 
 eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\n// test.ts\nvar Next_1 = __webpack_require__(/*! ./Next */ \"./src/Next.ts\");\nwindow.onload = function () {\n    var cNextElement = document.querySelector(\".CNext\");\n    if (cNextElement) {\n        // インスタンスを作成\n        var next = new Next_1.Next();\n        // ゲージの表示を有効にする\n        next.Display(true);\n        // テスト用データ（画像パス）を指定\n        var nextImages = [\n            \"image1.jpg\",\n            \"image2.jpg\",\n            \"image3.jpg\",\n            \"image4.jpg\",\n            \"image5.jpg\"\n        ];\n        // テスト用に UpdateNext メソッドを呼び出し\n        next.UpdateNext(nextImages);\n        // Next クラスの UI を CNext クラスの要素に追加\n        cNextElement.appendChild(Next_1.Next.container);\n    }\n};\n\n\n//# sourceURL=webpack://watermelon-io/./src/test.ts?");
 
@@ -60,7 +61,8 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\n// t
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/test.ts");
+/******/ 	var __webpack_exports__ = {};
+/******/ 	__webpack_modules__["./src/test.ts"]();
 /******/ 	
 /******/ })()
 ;
