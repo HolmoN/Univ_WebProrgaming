@@ -106,7 +106,7 @@ export class BubbleGenerator {
     ///----------
     ///ローカル変数
     ///----------
-    private _bubbleController: IBubbleController | undefined;
+    private _bubbleController: IBubbleController;
     private _nextBubbles: NextBubbles;
 
     ///----------
@@ -130,7 +130,13 @@ export class BubbleGenerator {
     //「上位クラス」「操作機関からのコールバック」
     //によって、この処理が呼ばれることを想定している
     //バブルを操作機関に送るだけ
-    public SendController(bubble: BubbleRaw) {
+    public SendController(bubble: BubbleRaw | undefined) {
+        //渡されたbubbleがundefinedだったら、例外処理を行う
+        if (bubble == undefined) {
+            this._bubbleController.UpdateBubble(bubble, () => {});
+            return;
+        }
+
         //NextBubblesの内容物を確認する
         this._nextBubbles.Log();
 
@@ -139,7 +145,7 @@ export class BubbleGenerator {
         MatterEnvironment.Instantiate(bubble.Body);
 
         //操作機関にバブルを送る
-        this._bubbleController?.UpdateBubble(bubble, async (retBubble) => {
+        this._bubbleController.UpdateBubble(bubble, async (retBubble) => {
             //バブルを落とす
             retBubble.SetStatic(false);
 
@@ -189,7 +195,11 @@ export class BubbleGenerator {
 
                 //次のバブルのレベルが上限を超えていなければ、バブルを生成する
                 if (newLevel >= this.BUBBLE_ESTABLISH.length) return;
-                this.SetAbsolutePos(this._GenerateBubble(newLevel), newX, newY, false);
+                this.SetAbsolutePos(this._GenerateBubble(newLevel - 1), newX, newY, false);
+
+                //接書したバブルのラベルと、新しく生成したバブルのラベルを出力する
+                //console.log(bodyA.label + " is collided with " + bodyB.label);
+                //console.log("New bubble is " + "bubble_" + newLevel);
             }
         });
     }

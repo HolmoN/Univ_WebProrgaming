@@ -5,5 +5,5 @@ export interface IBubbleController{
      * バブルをセットする
      * @param drop バブルがドロップされた時に呼び出されるコールバック関数
      */
-    UpdateBubble(bubble :BubbleRaw, drop: (retBubble :BubbleRaw) => void) :void;
+    UpdateBubble(bubble :BubbleRaw | undefined, drop: (retBubble :BubbleRaw) => void) :void;
 }
