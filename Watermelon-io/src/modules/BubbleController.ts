@@ -135,7 +135,7 @@ export class BubbleController implements IBubbleController {
     }
 
     private _Pressed(){
-        console.log("ぷれす");
+        //console.log("ぷれす");
 
         //ドラッグ可能状態に切り替える
         if(this._bubble === undefined) return;
@@ -143,7 +143,7 @@ export class BubbleController implements IBubbleController {
     }
 
     private _Released(){
-        console.log("りりーす");
+        //console.log("りりーす");
 
         //ドラッグ可能状態を解除する
         this.draggable = false;
