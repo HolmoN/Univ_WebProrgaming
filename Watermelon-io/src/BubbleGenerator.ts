@@ -12,6 +12,7 @@ import { Bubble_Lv7 } from "./modules/Bubbles/Bubble_Lv7";
 import { Bubble_Lv8 } from "./modules/Bubbles/Bubble_Lv8";
 import { Tasks } from "./modules/Tasks";
 import { BubbleController } from "./modules/BubbleController";
+import { Next } from "./Next";
 
 class preController implements IBubbleController {
 
@@ -49,19 +50,35 @@ class preController implements IBubbleController {
 class NextBubbles {
     //次に表示されるバブルを予約している
     private _nextBubbles: Array<BubbleRaw>; 
+    private readonly NEXT :Next;
+
+    
+
     //_nextBubblesのgetter
     public get nextBubbles(): Array<BubbleRaw> {
         return this._nextBubbles;
     }
-    
+
+    //NEXTのバブルのテクスチャパスを返す
+    private get _nextImagePathes(): Array<string> {
+        let ret = new Array<string>();
+        this._nextBubbles.forEach(element => {
+            ret.push(element.Body.render.sprite?.texture as string);
+        });
+        return ret;
+    }
 
     //NextGUIをコンストラクタ―の引数でもらう
     public constructor(...bubbles: BubbleRaw[]) {
         this._nextBubbles = new Array<BubbleRaw>();
+        this.NEXT = new Next();
+
         bubbles.forEach(bubble => {
             this._nextBubbles.push(bubble);
         });
         //NextGUIの更新処理を行う
+        this.NEXT.Display(true);
+        this.NEXT.UpdateNext(this._nextImagePathes);
     }
 
     //Nextの内容物を更新する
@@ -69,6 +86,7 @@ class NextBubbles {
         let result = this._nextBubbles.shift();
         this._nextBubbles.push(bubble);
         //NextGUIの更新処理を行う
+        this.NEXT.UpdateNext(this._nextImagePathes);
 
         return result;
     }
