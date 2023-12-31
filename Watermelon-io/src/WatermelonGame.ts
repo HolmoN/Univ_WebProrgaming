@@ -40,7 +40,7 @@ export class WatermelonGame implements IWatermelonGame {
 
         //ゲージの生成
         this.GAUGE = new Gauge();
-        this.GAUGE.setGaugeSize(100, 800); //ゲージサイズの変更
+        this.GAUGE.setGaugeSize(50, 700); //ゲージサイズの変更
         this.GAUGE.Display(true);
         this.GAUGE.FillAmount = 0.5;
     }

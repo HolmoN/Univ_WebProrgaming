@@ -1,6 +1,16 @@
 .container {
-    position: relative;
-    width: 420px;
-    height: 700px;
-    margin: 100px auto;
-  }
+  position: relative;
+  width: 420px;
+  height: 700px;
+  margin: 100px auto;
+}
+
+.Cgauge {
+  position: relative;
+  transform: translate(1580px, -810px);
+}
+
+.next-container {
+  position: relative;
+  transform: translate(2130px, -1510px);
+}
