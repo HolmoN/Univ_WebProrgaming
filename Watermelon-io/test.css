@@ -1,12 +1,18 @@
 .main {
     display: flex;
+
+
 }
+
+
 
 .start {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 100;
+    
 }
 
 .ready {
@@ -21,6 +27,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 100;
 }
 
 .hidden {
@@ -30,13 +37,19 @@
 .right {
     display: block;
     margin-left: auto;
-    margin-right: 0; /* margin-right を追加 */
+    margin-right: 5%;
+    /* margin-right を追加 */
     margin-top: 20%;
-  }
-  
-  .left {
+}
+
+.left {
     display: block;
     margin-right: auto;
-    margin-left: 0; /* margin-left を追加 */
+    margin-left: 5%;
+    /* margin-left を追加 */
     margin-top: 20%;
-  }
+}
+
+.bg {
+    position: absolute;
+}

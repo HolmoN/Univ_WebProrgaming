@@ -26,7 +26,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexpo
   \*********************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar GameCall_1 = __webpack_require__(/*! ./GameCall */ \"./src/GameCall.ts\");\nwindow.onload = function () {\n    var testcall = new GameCall_1.GameCall();\n    testcall.DisplayReady(false);\n    testcall.DisplayStart(false);\n    testcall.DisplayFinish(true);\n    testcall.DisplayWL(false, false);\n};\n\n\n//# sourceURL=webpack://watermelon-io/./src/test.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nvar GameCall_1 = __webpack_require__(/*! ./GameCall */ \"./src/GameCall.ts\");\nwindow.onload = function () {\n    var testcall = new GameCall_1.GameCall();\n    testcall.DisplayReady(false);\n    testcall.DisplayStart(false);\n    testcall.DisplayFinish(false);\n    testcall.DisplayWL(true, false);\n};\n\n\n//# sourceURL=webpack://watermelon-io/./src/test.ts?");
 
 /***/ })
 
