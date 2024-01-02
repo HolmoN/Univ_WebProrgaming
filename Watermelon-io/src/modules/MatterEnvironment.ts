@@ -37,6 +37,11 @@ export class Canvas {
 }
 
 export class MatterEnvironment {
+    ///----------
+    ///定数
+    ///----------
+
+    private static readonly GRAVITY: number = 0.6;
 
     ///----------
     ///ローカル変数
@@ -75,6 +80,7 @@ export class MatterEnvironment {
     public static Init(canvas: Canvas) {
         //必要なコンポーネントの初期化を行う
         this._engine = Matter.Engine.create();
+        this.engine.world.gravity.y = this.GRAVITY;
         this._render = Matter.Render.create({
             element: canvas.htmlElement,
             engine: this._engine,

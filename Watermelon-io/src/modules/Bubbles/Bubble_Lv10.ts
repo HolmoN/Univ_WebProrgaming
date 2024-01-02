@@ -1,13 +1,13 @@
 import { BubbleRaw } from './BubbleRaw';
 
-export class Bubble_Lv4 extends BubbleRaw {
+export class Bubble_Lv10 extends BubbleRaw {
     //バブルの定義をする
     public constructor(x: number, y: number) {
-        super(x, y, 60, {
-            label: "bubble_4",
+        super(x, y, 150, {
+            label: "bubble_10",
             render: {
                 sprite: {
-                    texture: 'img/Bubbles/lv4.png',
+                    texture: 'img/Bubbles/lv10.png',
                     xScale: 0.05,
                     yScale: 0.05
                 }

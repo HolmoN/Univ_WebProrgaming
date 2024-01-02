@@ -7,9 +7,9 @@ export class Bubble_Lv1 extends BubbleRaw {
             label: "bubble_1",
             render: {
                 sprite: {
-                    texture: 'img/NextTest2/lv1.png',
-                    xScale: 2,
-                    yScale: 2
+                    texture: 'img/Bubbles/lv1.png',
+                    xScale: 0.02,
+                    yScale: 0.02
                 }
             }
         });
