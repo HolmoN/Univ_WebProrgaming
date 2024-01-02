@@ -25,9 +25,9 @@ window.onload = () => {
    MatterEnvironment.Init(canvas);
 
    //ゲームの初期化
-   //const watermelonGame = new WatermelonGame();
-   const watermelonGame = new WatermelonGame_Debug();
-   //watermelonGame.Play(() => { });
+   const watermelonGame = new WatermelonGame();
+   //const watermelonGame = new WatermelonGame_Debug();
+   watermelonGame.Play(() => { });
 
    //クリック
    container.addEventListener("click", () => {
@@ -43,7 +43,6 @@ window.onload = () => {
    });
 
    //キー入力
-   /*
    document.addEventListener('keydown', (event) => {
       if (event.code === 'Space') {
          console.log("スペースが押された");
@@ -60,8 +59,8 @@ window.onload = () => {
          watermelonGame.Stop();
       }
    });
-   */
 
+   /*
    document.addEventListener('keydown', (event) => {
       //各種バブルの生成
       if (event.key === '1') {
@@ -99,4 +98,5 @@ window.onload = () => {
          watermelonGame.BubbleGenerator.SendController(new Bubble_Lv11(MatterEnvironment.width / 2, 5), () => { });
       }
    });
+   */
 }

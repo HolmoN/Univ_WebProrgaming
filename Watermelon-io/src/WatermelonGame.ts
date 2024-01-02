@@ -13,7 +13,7 @@ export class WatermelonGame implements IWatermelonGame {
     ///----------
     private readonly BUBBLE_GENERATOR: BubbleGenerator;
     private readonly GAMEOVER_AREA: GameoverArea;
-    private readonly GAUGE: Gauge;
+    //private readonly GAUGE: Gauge;
 
     ///----------
     /// メンバ変数
@@ -39,10 +39,12 @@ export class WatermelonGame implements IWatermelonGame {
         MatterEnvironment.Instantiate(this.GAMEOVER_AREA.boundary);
 
         //ゲージの生成
+        /*
         this.GAUGE = new Gauge();
-        this.GAUGE.setGaugeSize(100, 800); //ゲージサイズの変更
+        this.GAUGE.setGaugeSize(50, 700); //ゲージサイズの変更
         this.GAUGE.Display(true);
         this.GAUGE.FillAmount = 0.5;
+        */
     }
 
     /**
