@@ -10,7 +10,7 @@ export class Next implements INext {
         if (!Next.container) {
             // 新しい div 要素を作成し、"next-container" クラスを追加
             Next.container = document.createElement("div");
-            Next.container.classList.add("next-container");
+            Next.container.className ="next-container";
 
             // 5つの窓を作成
             for (let i = 0; i < 5; i++) {
@@ -31,8 +31,13 @@ export class Next implements INext {
                 Next.container.appendChild(windowDiv);
             }
 
-            // container を body 要素に追加
-            document.body.appendChild(Next.container);
+            //<CNext>下に移動
+            const CNext = document.querySelector(".Cnext") as HTMLDivElement;
+            if (CNext) {
+                CNext.appendChild(Next.container);
+            } else {
+                console.error("Element with class 'hgoehuga' not found");
+            }
         }
     }
 
