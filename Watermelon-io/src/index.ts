@@ -16,6 +16,8 @@ import { Bubble_Lv8 } from "./modules/Bubbles/Bubble_Lv8";
 import { Bubble_Lv9 } from "./modules/Bubbles/Bubble_Lv9";
 import { Bubble_Lv10 } from "./modules/Bubbles/Bubble_Lv10";
 import { Bubble_Lv11 } from "./modules/Bubbles/Bubble_Lv11";
+import { ScoreSQL } from "./Interface/IScoreSqlHandler";
+import { ScoreSqlHandler } from "./modules/ScoreSqlHandler";
 
 window.onload = () => {
    const container = document.querySelector<HTMLElement>(".container");
@@ -54,9 +56,11 @@ window.onload = () => {
       }
 
       //各種バブル生成のテストが行えるようにする
-      if (event.code === 'Enter') {
-         console.log("エンターが押された");
-         watermelonGame.Stop();
+      if (event.key === 'W' || event.key === 'w') {
+         console.log("SQLにデータを送信します");
+         //const scoreSqlHandler = new ScoreSqlHandler();
+         //scoreSqlHandler.SetData(new ScoreSQL("2020-01-01", "test", 100));
+         
       }
    });
 

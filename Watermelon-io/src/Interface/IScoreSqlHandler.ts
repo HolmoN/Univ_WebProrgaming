@@ -12,13 +12,13 @@ export class ScoreSQL{
     private _score :number;
 
     //ゲッター
-    get Day() :string{
+    get day() :string{
         return this._day;
     }
-    get Name() :string{
+    get name() :string{
         return this._name;
     }
-    get Score() :number{
+    get score() :number{
         return this._score;
     }
 
