@@ -6,7 +6,7 @@ import { GameoverArea } from "./modules/GameoverJudge";
 import { MatterEnvironment } from "./modules/MatterEnvironment";
 import { Walls } from "./modules/Walls";
 
-export class WatermelonGame implements IWatermelonGame {
+export class WatermelonGame_Debug implements IWatermelonGame {
 
     ///----------
     /// 定数
@@ -73,4 +73,12 @@ export class WatermelonGame implements IWatermelonGame {
         let nextBubble = this.BUBBLE_GENERATOR.NextBubble;
         if (nextBubble != undefined) this.BUBBLE_GENERATOR.SendController(nextBubble, () => this.GenerateBubbles());
     }
+
+    ///----------
+    ///デバッグ用のメンバ変数公開
+    ///----------
+    get BubbleGenerator(): BubbleGenerator {
+        return this.BUBBLE_GENERATOR;
+    }
+
 }

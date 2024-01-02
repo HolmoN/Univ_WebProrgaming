@@ -16,9 +16,9 @@ import { Next } from "./Next";
 
 class preController implements IBubbleController {
 
-    container :HTMLElement | null;
+    container: HTMLElement | null;
     bubble: BubbleRaw | undefined;
-    drop: ((retBubble :BubbleRaw) => void) | undefined;
+    drop: ((retBubble: BubbleRaw) => void) | undefined;
 
     constructor() {
         this.container = document.querySelector<HTMLElement>(".container");
@@ -29,7 +29,7 @@ class preController implements IBubbleController {
         });
     }
 
-    UpdateBubble(bubble: BubbleRaw, drop: (retBubble :BubbleRaw) => void): void {
+    UpdateBubble(bubble: BubbleRaw, drop: (retBubble: BubbleRaw) => void): void {
         this.bubble = bubble;
         this.drop = drop;
 
@@ -37,11 +37,11 @@ class preController implements IBubbleController {
         this.container.addEventListener("click", this.Clicked);
     }
 
-    private Clicked(){
-        if(this.bubble === undefined || this.drop === undefined) return;
+    private Clicked() {
+        if (this.bubble === undefined || this.drop === undefined) return;
 
         this.drop(this.bubble);
-        
+
         if (this.container == null) return;
         this.container.removeEventListener("click", this.Clicked);
     }
@@ -49,10 +49,10 @@ class preController implements IBubbleController {
 
 class NextBubbles {
     //次に表示されるバブルを予約している
-    private _nextBubbles: Array<BubbleRaw>; 
-    private readonly NEXT :Next;
+    private _nextBubbles: Array<BubbleRaw>;
+    private readonly NEXT: Next;
 
-    
+
 
     //_nextBubblesのgetter
     public get nextBubbles(): Array<BubbleRaw> {
@@ -109,8 +109,8 @@ export class BubbleGenerator {
 
     //バブルの生成確立
     //index=0 : Lv1
-    private readonly BUBBLE_ESTABLISH: number[] = [0.5, 0.3, 0.15, 0.05, 0.0, 0.0, 0.0, 0.0];
-    
+    private readonly BUBBLE_ESTABLISH: number[] = [0.5, 0.3, 0.15, 0.05, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+
     //バブルを落としてから、次のバブルが生成されるまでの時間(ms)
     private readonly BUBBLE_GENE_INTERVAL: number = 200;
 
@@ -148,10 +148,11 @@ export class BubbleGenerator {
     //「上位クラス」「操作機関からのコールバック」
     //によって、この処理が呼ばれることを想定している
     //バブルを操作機関に送るだけ
-    public SendController(bubble: BubbleRaw | undefined) {
+    public SendController(bubble: BubbleRaw | undefined, callBack: (() => void)): void {
         //渡されたbubbleがundefinedだったら、例外処理を行う
         if (bubble == undefined) {
-            this._bubbleController.UpdateBubble(bubble, () => {});
+            this._bubbleController.UpdateBubble(bubble, () => { });
+            callBack();
             return;
         }
 
@@ -168,17 +169,20 @@ export class BubbleGenerator {
             retBubble.SetStatic(false);
 
             //次のバブルを取得する
-            let bubble = this.NextBubble;
-            if (bubble === undefined) {
-                //undefinedだったら、エラーを吐く
-                throw new Error("NextBubbles.Switch() returns undefined.");
-            }
+            //let bubble = this.NextBubble;
+            //if (bubble === undefined) {
+            //undefinedだったら、エラーを吐く
+            //    throw new Error("NextBubbles.Switch() returns undefined.");
+            //}
 
             await Tasks.sleep(this.BUBBLE_GENE_INTERVAL);
 
             //操作機関にバブルを送る
-            this.SendController(bubble);
-            
+            //this.SendController(bubble);
+
+            //処理が終わったらコールバックを送る
+            callBack();
+
         });
     }
 
@@ -205,7 +209,7 @@ export class BubbleGenerator {
                 const currentBubbleLevel = Number(bodyA.label.replace("bubble_", ''));
                 const newLevel = currentBubbleLevel + 1;
                 const newX = (bodyA.position.x + bodyB.position.x) / 2;
-                const newY = (bodyA.position.y + bodyB.position.y) / 2 -50;
+                const newY = (bodyA.position.y + bodyB.position.y) / 2 - 50;
 
                 // 2つのバブルを破壊
                 MatterEnvironment.Destroy(bodyA);
@@ -247,28 +251,37 @@ export class BubbleGenerator {
         let result: BubbleRaw;
         switch (level) {
             case 0:
-                result = new Bubble_Lv1(MatterEnvironment.width/2, 5);
+                result = new Bubble_Lv1(MatterEnvironment.width / 2, 5);
                 break;
             case 1:
-                result = new Bubble_Lv2(MatterEnvironment.width/2, 5);
+                result = new Bubble_Lv2(MatterEnvironment.width / 2, 5);
                 break;
             case 2:
-                result = new Bubble_Lv3(MatterEnvironment.width/2, 5);
+                result = new Bubble_Lv3(MatterEnvironment.width / 2, 5);
                 break;
             case 3:
-                result = new Bubble_Lv4(MatterEnvironment.width/2, 5);
+                result = new Bubble_Lv4(MatterEnvironment.width / 2, 5);
                 break;
             case 4:
-                result = new Bubble_Lv5(MatterEnvironment.width/2, 5);
+                result = new Bubble_Lv5(MatterEnvironment.width / 2, 5);
                 break;
             case 5:
-                result = new Bubble_Lv6(MatterEnvironment.width/2, 5);
+                result = new Bubble_Lv6(MatterEnvironment.width / 2, 5);
                 break;
             case 6:
-                result = new Bubble_Lv7(MatterEnvironment.width/2, 5);
+                result = new Bubble_Lv7(MatterEnvironment.width / 2, 5);
                 break;
             case 7:
-                result = new Bubble_Lv8(MatterEnvironment.width/2, 5);
+                result = new Bubble_Lv8(MatterEnvironment.width / 2, 5);
+                break;
+            case 8:
+                result = new Bubble_Lv8(MatterEnvironment.width / 2, 5);
+                break;
+            case 9:
+                result = new Bubble_Lv8(MatterEnvironment.width / 2, 5);
+                break;
+            case 10:
+                result = new Bubble_Lv8(MatterEnvironment.width / 2, 5);
                 break;
             default:
                 //エラーを吐く

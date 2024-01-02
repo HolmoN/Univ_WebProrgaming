@@ -151,5 +151,10 @@ export class BubbleController implements IBubbleController {
         //バブルを落とす
         if(this._bubble === undefined || this._drop === undefined) return;
         this._drop(this._bubble);
+
+        //各種変数を初期化する
+        this._bubble = undefined;
+        this._drop = undefined;
+
     }
 }
