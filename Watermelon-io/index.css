@@ -1,6 +1,46 @@
+.gameScene{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.Game1{
+  display: flex;
+}
+
+.container .sideInfos{
+  margin: 100px auto;
+}
+
 .container {
-    position: relative;
-    width: 420px;
-    height: 700px;
-    margin: 100px auto;
-  }
+  width: 550px;
+  height: 700px;
+}
+
+.sideInfos {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+  width: 200px;
+  height: 700px;
+}
+
+.Cnext{
+  height: 320px;
+}
+
+.Cscore{
+  background-color: rgba(0, 0, 255, 0.3);
+  margin-top: 100px; 
+  width: 200px;
+  height: 200px;
+}
+
+/*
+.Cgauge {
+  position: relative;
+  transform: translate(1580px, -810px);
+}
+*/

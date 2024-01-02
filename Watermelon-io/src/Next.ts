@@ -36,7 +36,7 @@ export class Next implements INext {
             if (CNext) {
                 CNext.appendChild(Next.container);
             } else {
-                console.error("Element with class 'hgoehuga' not found");
+                console.error("Element with class '.Cnext' not found");
             }
         }
     }
