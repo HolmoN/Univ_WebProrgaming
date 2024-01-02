@@ -1,0 +1,26 @@
+<!-- GameScene/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Scene</title>
+</head>
+<body>
+
+    <h1>Welcome to the Game Scene</h1>
+
+    <!-- ボタンを追加 -->
+    <button id="goToTestButton">Go to Test</button>
+
+    <!-- ボタンクリック時に実行されるスクリプトを追加 -->
+    <script>
+        document.getElementById('goToTestButton').addEventListener('click', function() {
+            // ボタンがクリックされたらTest/index.htmlに遷移
+            window.location.href = './Test/index.html';
+        });
+    </script>
+
+</body>
+</html>

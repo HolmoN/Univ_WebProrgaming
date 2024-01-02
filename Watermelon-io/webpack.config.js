@@ -5,18 +5,25 @@ module.exports = {
 // development に設定するとソースマップ有効でJSファイルが出力される
 mode: 'development', // "production" | "development" | "none"
 
-// メインとなるJavaScriptファイル（エントリーポイント）
-
-entry: './src/index.ts',  //==========本番駆動==========//
-//entry: './src/test.ts',  //==========テスト駆動==========//
-
+//*
+//==========GameScene==========//
+entry: './server/public/gamescene/src/index.ts',
 output: {
-    path: path.join(__dirname, "dist"),
+    path: path.join(__dirname, "server/public/gamescene"),
 
-    filename: "index.js"  //==========本番駆動==========//
-    //filename: "test.js"  //==========テスト駆動==========//
+    filename: "index.js"  
 
 },
+/*/
+//==========Hoge==========//
+entry: 'server/public/gamescene/src/index.ts',
+output: {
+    path: path.join(__dirname, "server/public/gamescene/src"),
+
+    filename: "index.js"  
+
+},
+//*/
 
 module: {
     rules: [{
