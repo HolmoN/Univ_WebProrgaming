@@ -1,10 +1,20 @@
-<html>
-  <body>
-    <link rel="stylesheet" type="text/css" href="index.css" media="screen" />
-    <h1>simple chat</h1>
-    <input id="inputText" type="text">
-    <input id="sendButton" type="submit">
-    <ul id="messageList">
-    <img src="./img/Lv1.png" alt="代替テキスト">
-  </body>
+<!-- クライアント側のHTML -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket.io Example</title>
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <button id="startConnectionButton" style="visibility:visible;">接続を開始</button>
+  <p id="connectingMessage" style="visibility:hidden;">接続中</p>
+  <button id="sendMessageButton" style="visibility:hidden;">メッセージを送る</button>
+  <div id="messages">
+  </div>
+</body>
+
 </html>
