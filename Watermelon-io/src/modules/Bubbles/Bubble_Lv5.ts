@@ -8,8 +8,8 @@ export class Bubble_Lv5 extends BubbleRaw {
             render: {
                 sprite: {
                     texture: 'img/Bubbles/lv5.png',
-                    xScale: 0.05,
-                    yScale: 0.05
+                    xScale: 0.123,
+                    yScale: 0.123
                 }
             }
         });
