@@ -7,7 +7,7 @@ export class GameoverArea {
     ///定数
     ///----------
     private readonly GAMEOVER_TIME: number = 3000; //ゲームオーバーになるまでの時間(ms)
-    private readonly TICKRATE: number = 10; //ゲームオーバーになるまでの時間(ms)
+    private readonly TICKRATE: number = 10; //ティックレート
 
     ///----------
     /// メンバ変数
@@ -85,7 +85,7 @@ export class GameoverArea {
                 this._gameOver();
             }
             else {
-                
+                //console.log("exited");
             }
         }, this.GAMEOVER_TIME);
     }

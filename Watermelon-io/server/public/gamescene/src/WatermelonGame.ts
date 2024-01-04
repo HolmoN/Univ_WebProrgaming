@@ -2,6 +2,7 @@
 import { BubbleGenerator } from "./BubbleGenerator";
 import { Gauge } from "./Gauge";
 import { IWatermelonGame } from "./Interface/IWatermelonGame";
+import { Result } from "./Result";
 import { GameoverArea } from "./modules/GameoverJudge";
 import { MatterEnvironment } from "./modules/MatterEnvironment";
 import { Walls } from "./modules/Walls";
@@ -14,6 +15,7 @@ export class WatermelonGame implements IWatermelonGame {
     private readonly BUBBLE_GENERATOR: BubbleGenerator;
     private readonly GAMEOVER_AREA: GameoverArea;
     //private readonly GAUGE: Gauge;
+    private readonly RESULT: Result;
 
     ///----------
     /// メンバ変数
@@ -45,6 +47,9 @@ export class WatermelonGame implements IWatermelonGame {
         this.GAUGE.Display(true);
         this.GAUGE.FillAmount = 0.5;
         */
+
+        //リザルトの生成
+        this.RESULT = new Result();
     }
 
     /**
@@ -69,6 +74,11 @@ export class WatermelonGame implements IWatermelonGame {
     Stop(): void {
         this.BUBBLE_GENERATOR.SendController(undefined, () => {});
         this.GAMEOVER_AREA.SetCallBack(undefined);
+
+        //リザルトの表示を行う
+        this.RESULT.Play(0, () => {
+            console.log("リザルト終了");
+        });
     }
 
     private GenerateBubbles(): void {

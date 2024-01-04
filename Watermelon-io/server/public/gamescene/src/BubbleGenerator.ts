@@ -112,7 +112,10 @@ export class BubbleGenerator {
     private readonly BUBBLE_ESTABLISH: number[] = [0.5, 0.3, 0.15, 0.05, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
 
     //バブルを落としてから、次のバブルが生成されるまでの時間(ms)
-    private readonly BUBBLE_GENE_INTERVAL: number = 200;
+    private readonly BUBBLE_GENE_INTERVAL: number = 700;
+
+    //スコアカウンター
+    //priavte readonly SCORE_COUNTER: ScoreCounter;
 
     ///----------
     ///プロパティ
@@ -157,7 +160,7 @@ export class BubbleGenerator {
         }
 
         //NextBubblesの内容物を確認する
-        this._nextBubbles.Log();
+        //this._nextBubbles.Log();
 
         //バブルを生成する
         bubble.SetStatic(true);

@@ -1,0 +1,62 @@
+body {
+    background-image: url("./image/haikei.png");
+    /* マージンをリセット */
+    margin: 0;
+
+    /* 画面外のスクロールを無効にする */
+    overflow: hidden;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    outline: none;
+
+    /* 垂直方向に配置 */
+    flex-direction: column;
+
+    /* 下側に配置 */
+    justify-content: flex-end;
+    /* 画面の高さいっぱいに広げる */
+    height: 80vh;
+}
+
+.start button {
+    display: block;
+    margin: auto;
+
+    border-radius: 5px;
+    border: 0px;
+    background-color: #F9F3D9;
+}
+
+.start button:hover {
+    background-color: #ADA998;
+}
+
+.start img {
+    width: 500px;
+    height: 130px;
+    z-index: 0;
+    /* 画像よりも上に表示する */
+}
+
+.start span {
+    position: relative;
+    z-index: 1;
+    /* 画像よりも上に表示する */
+}
+
+.matchingText {
+    color: beige;
+    font-size: 80px;
+
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.hidden {
+    display: none;
+}

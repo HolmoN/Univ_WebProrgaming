@@ -17,11 +17,13 @@ import { Bubble_Lv9 } from "./modules/Bubbles/Bubble_Lv9";
 import { Bubble_Lv10 } from "./modules/Bubbles/Bubble_Lv10";
 import { Bubble_Lv11 } from "./modules/Bubbles/Bubble_Lv11";
 import { ISQLHandler } from "./Interface/ISQLHandler";
-import { ResultSave } from "./ResultSave";
+import { ResultSave } from "./modules/ResultSave";
 import { io, Socket } from 'socket.io-client';
+import { Result } from "./Result";
 
 window.onload = () => {
 
+   /*
    document.addEventListener('keydown', (event) => {
       if (event.key === 'W' || event.key === 'w') {
          const sqlTest :ISQLHandler = new ResultSave();
@@ -29,8 +31,8 @@ window.onload = () => {
          console.log("wが押された");
       }
    });
+   */
 
-   /*
    const container = document.querySelector<HTMLElement>(".container");
    if (container == null) return;
 
@@ -40,7 +42,7 @@ window.onload = () => {
    //ゲームの初期化
    const watermelonGame = new WatermelonGame();
    //const watermelonGame = new WatermelonGame_Debug();
-   watermelonGame.Play(() => { });
+   //watermelonGame.Play(() => { });
 
    //クリック
    container.addEventListener("click", () => {
@@ -65,14 +67,15 @@ window.onload = () => {
          console.log("エンターが押された");
          watermelonGame.Stop();
       }
-
-      //各種バブル生成のテストが行えるようにする
-      if (event.code === 'Enter') {
-         console.log("エンターが押された");
-         watermelonGame.Stop();
+   /*
+      if(event.code === 'Space'){
+         const result = new Result()
+         result.Play(0, () => {
+            console.log("リザルト終了");
+         });
       }
+      */
    });
-   */
 
    /*
    document.addEventListener('keydown', (event) => {

@@ -14,7 +14,5 @@ export class Bubble_Lv1 extends BubbleRaw {
                 }
             }
         });
-
-        console.log(__dirname);
     }
 }

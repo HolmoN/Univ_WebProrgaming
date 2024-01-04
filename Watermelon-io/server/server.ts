@@ -19,6 +19,9 @@ app.get('/Test', (req, res) => {
 app.get('/gamescene', (req, res) => {
   app.use(express.static(path.join(__dirname, 'public', 'gamescene')));
 });
+app.get('/titlescene', (req, res) => {
+  app.use(express.static(path.join(__dirname, 'public', 'titlescene')));
+});
 
 io.on('connection', (socket) => {
   console.log('クライアントが接続しました');

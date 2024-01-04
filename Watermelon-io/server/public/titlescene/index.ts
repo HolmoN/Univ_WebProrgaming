@@ -1,9 +1,8 @@
-import { ITitleScene } from "./Interface/ITitleScene"
+import { ITitleScene } from "./src/ITitleScene"
 export class TitleScene implements ITitleScene {
 
     private _buttonElement: HTMLButtonElement;
     private _matchingText: HTMLElement;
-
 
     /**
      * スタートボタンのオブジェクトを返す
@@ -17,8 +16,6 @@ export class TitleScene implements ITitleScene {
         this._buttonElement = document.getElementById('start') as HTMLButtonElement;
         this._matchingText = document.getElementById('matchingText') as HTMLElement;
 
-
-
         // クリックイベントのリスナーを登録
         this._buttonElement.addEventListener('click', (event: MouseEvent) => {
             console.log("ボタンがクリックされました");
@@ -28,12 +25,7 @@ export class TitleScene implements ITitleScene {
             //マッチングを開始する
             this._matchingText.style.display = 'block';
         });
-
-
-
     }
-
-
 
     /**
      * 画面を描写するかを切り替える
@@ -45,9 +37,7 @@ export class TitleScene implements ITitleScene {
                 // display = falseはすべて非表示にする
                 this._buttonElement.style.visibility = "hidden";
                 this._matchingText.style.visibility = "hidden";
-
             } else {
-
 
             }
         }
@@ -59,16 +49,10 @@ export class TitleScene implements ITitleScene {
     Matched(matched: boolean): void {
         if (this._buttonElement && this._matchingText) {
             if (!matched) {
-
-
                 // マッチング結果に基づいて画像ボタンを再描写
-
                 this._buttonElement.className = "start";
                 this._matchingText.style.display = 'none';
-
-
             }
-
             else {
 
             }
