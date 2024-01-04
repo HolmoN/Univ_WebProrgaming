@@ -1,5 +1,19 @@
 import { io, Socket } from 'socket.io-client';
+import { ServerHandler } from '../src/ServerHandler';
 
+window.onload = () => {
+    // イベントを送信する例
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'W' || event.key === 'w') {
+            const socket = io();
+            const eventData = 'ボタンがクリックされました';
+            socket.emit('sqlSave', "2020-02-02", "hgoe", 22);
+        }
+    });
+}
+
+
+/*
 let _clientId: string;
 let _partnerId: string;
 let _startConnectionButton: HTMLElement;
@@ -16,10 +30,22 @@ if (!_sendMessageButton_raw || !_startConnectionButton_raw || !_connectingMessag
 _startConnectionButton = _startConnectionButton_raw;
 _sendMessageButton = _sendMessageButton_raw;
 _connectingMessage = _connectingMessage_raw;
+*/
 
-// サーバーに接続
-const socket: Socket = io();
+/*
+window.onload = () => {
+    // サーバーに接続
+    const socket: Socket = io();
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'W' || event.key === 'w') {
+            socket.emit('sqlSave', "hoge", "huga", 100);
+            console.log("wが押された");
+        }
+    });
+}
+*/
 
+/*
 // サーバーからのIDを受信
 socket.on('assignId', (clientId: string) => {
     console.log(`クライアントIDが割り当てられました: ${clientId}`);
@@ -53,7 +79,7 @@ socket.on('connectionEstablish', (partnerId: string) => {
 
 //メッセージ送信
 _sendMessageButton.addEventListener('click', () => {
-    socket.emit('semdMessage', _partnerId, "ほげほげ");
+    
 });
 
 //メッセージ受信
@@ -89,3 +115,4 @@ socket.on('endSession', () => {
     }
 
 });
+*/

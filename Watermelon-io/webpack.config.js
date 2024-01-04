@@ -5,7 +5,7 @@ module.exports = {
 // development に設定するとソースマップ有効でJSファイルが出力される
 mode: 'development', // "production" | "development" | "none"
 
-//*
+//* 
 //==========GameScene==========//
 entry: './server/public/gamescene/src/index.ts',
 output: {
@@ -15,10 +15,10 @@ output: {
 
 },
 /*/
-//==========Hoge==========//
-entry: 'server/public/gamescene/src/index.ts',
+//==========Test==========//
+entry: './server/public/Test/index.ts',
 output: {
-    path: path.join(__dirname, "server/public/gamescene/src"),
+    path: path.join(__dirname, "server/public/Test"),
 
     filename: "index.js"  
 

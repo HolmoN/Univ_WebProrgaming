@@ -16,8 +16,21 @@ import { Bubble_Lv8 } from "./modules/Bubbles/Bubble_Lv8";
 import { Bubble_Lv9 } from "./modules/Bubbles/Bubble_Lv9";
 import { Bubble_Lv10 } from "./modules/Bubbles/Bubble_Lv10";
 import { Bubble_Lv11 } from "./modules/Bubbles/Bubble_Lv11";
+import { ISQLHandler } from "./Interface/ISQLHandler";
+import { ResultSave } from "./ResultSave";
+import { io, Socket } from 'socket.io-client';
 
 window.onload = () => {
+
+   document.addEventListener('keydown', (event) => {
+      if (event.key === 'W' || event.key === 'w') {
+         const sqlTest :ISQLHandler = new ResultSave();
+         sqlTest.SetData("2024-12-12", "huga", "500");
+         console.log("wが押された");
+      }
+   });
+
+   /*
    const container = document.querySelector<HTMLElement>(".container");
    if (container == null) return;
 
@@ -59,6 +72,7 @@ window.onload = () => {
          watermelonGame.Stop();
       }
    });
+   */
 
    /*
    document.addEventListener('keydown', (event) => {
