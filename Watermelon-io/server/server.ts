@@ -10,17 +10,18 @@ const io = socketIO(server);
 const sqlite3 = require('sqlite3').verbose();
 
 // 各ページのルーティング
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/', (req, res) => {
-  app.use(express.static(path.join(__dirname, 'public')));
 });
 app.get('/Test', (req, res) => {
-  app.use(express.static(path.join(__dirname, 'public', 'Test')));
+  res.sendFile('index.html', { root: path.join(__dirname, 'public/Test') });
 });
 app.get('/gamescene', (req, res) => {
-  app.use(express.static(path.join(__dirname, 'public', 'gamescene')));
+  res.sendFile('index.html', { root: path.join(__dirname, 'public/gamescene') });
 });
 app.get('/titlescene', (req, res) => {
-  app.use(express.static(path.join(__dirname, 'public', 'titlescene')));
+  res.sendFile('index.html', { root: path.join(__dirname, 'public/titlescene') });
 });
 
 io.on('connection', (socket) => {

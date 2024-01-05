@@ -42,7 +42,7 @@ window.onload = () => {
    //ゲームの初期化
    const watermelonGame = new WatermelonGame();
    //const watermelonGame = new WatermelonGame_Debug();
-   //watermelonGame.Play(() => { });
+   watermelonGame.Play(() => { });
 
    //クリック
    container.addEventListener("click", () => {

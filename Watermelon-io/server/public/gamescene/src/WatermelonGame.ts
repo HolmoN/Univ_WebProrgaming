@@ -78,6 +78,7 @@ export class WatermelonGame implements IWatermelonGame {
         //リザルトの表示を行う
         this.RESULT.Play(0, () => {
             console.log("リザルト終了");
+            window.location.href = '/titlescene';
         });
     }
 

@@ -1,3 +1,5 @@
+import { io, Socket } from 'socket.io-client';
+
 export class ServerHandler {
     ///----------
     ///定数
