@@ -115,7 +115,7 @@ export class BubbleGenerator {
     private readonly BUBBLE_GENE_INTERVAL: number = 700;
 
     //スコアカウンター
-    //priavte readonly SCORE_COUNTER: ScoreCounter;
+    private readonly SCORE_DOM: HTMLElement;
 
     ///----------
     ///プロパティ
@@ -123,12 +123,17 @@ export class BubbleGenerator {
     public get NextBubble(): BubbleRaw | undefined {
         return this._nextBubbles.Switch(this._GenerateRandomBubble());
     }
+    public get Score(): number {
+        return this._score;
+    }
 
     ///----------
     ///ローカル変数
     ///----------
     private _bubbleController: IBubbleController;
     private _nextBubbles: NextBubbles;
+
+    private _score: number;
 
     ///----------
     ///メソッド
@@ -143,9 +148,14 @@ export class BubbleGenerator {
             this._GenerateRandomBubble(),
             this._GenerateRandomBubble()
         );
+        const scoreDom = document.querySelector<HTMLElement>(".Cscore");
+        if(!scoreDom) throw new Error("scoreDom is null");
+        this.SCORE_DOM = scoreDom;
+        this._score = 0;
 
         //イベントの登録を行う
         Matter.Events.on(MatterEnvironment.engine, "collisionStart", (ev) => this._GetCollision(ev));
+        
     }
 
     //「上位クラス」「操作機関からのコールバック」
@@ -221,6 +231,12 @@ export class BubbleGenerator {
                 //次のバブルのレベルが上限を超えていなければ、バブルを生成する
                 if (newLevel >= this.BUBBLE_ESTABLISH.length) return;
                 this.SetAbsolutePos(this._GenerateBubble(newLevel - 1), newX, newY, false);
+
+                //スコアの加算を行う
+                console.log("Current bubble level : " + currentBubbleLevel);
+                this._score += currentBubbleLevel*currentBubbleLevel;
+                console.log("Score : " + this._score);
+                this.SCORE_DOM.innerText = "スコア : " + this._score;
 
                 //接書したバブルのラベルと、新しく生成したバブルのラベルを出力する
                 //console.log(bodyA.label + " is collided with " + bodyB.label);

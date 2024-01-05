@@ -76,7 +76,7 @@ export class WatermelonGame implements IWatermelonGame {
         this.GAMEOVER_AREA.SetCallBack(undefined);
 
         //リザルトの表示を行う
-        this.RESULT.Play(0, () => {
+        this.RESULT.Play(this.BUBBLE_GENERATOR.Score, () => {
             console.log("リザルト終了");
             window.location.href = '/titlescene';
         });
