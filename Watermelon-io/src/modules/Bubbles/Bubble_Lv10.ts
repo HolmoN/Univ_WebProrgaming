@@ -3,7 +3,7 @@ import { BubbleRaw } from './BubbleRaw';
 export class Bubble_Lv10 extends BubbleRaw {
     //バブルの定義をする
     public constructor(x: number, y: number) {
-        super(x, y, 150, {
+        super(x, y, 132, {
             label: "bubble_10",
             render: {
                 sprite: {
