@@ -1,37 +1,32 @@
-import { io, Socket } from 'socket.io-client';
-import { ServerHandler } from '../src/ServerHandler';
-
-window.onload = () => {
-    const socket = io();
-
-    let cliantId: string;
-    let pairID: string;
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var socket_io_client_1 = require("socket.io-client");
+window.onload = function () {
+    var socket = (0, socket_io_client_1.io)();
+    var cliantId;
+    var pairID;
     // イベントを送信する例
-    document.addEventListener('keydown', (event) => {
+    document.addEventListener('keydown', function (event) {
         if (event.key === 'W' || event.key === 'w') {
             socket.emit('matchingRequest');
         }
-
         if (event.key === 'E' || event.key === 'e') {
             socket.emit('matchingTimeout');
         }
     });
-
-    socket.on('assignId', (receiveID: string) => {
-        console.log(`クライアントIDが割り当てられました: ${receiveID}`);
+    socket.on('assignId', function (receiveID) {
+        console.log("\u30AF\u30E9\u30A4\u30A2\u30F3\u30C8ID\u304C\u5272\u308A\u5F53\u3066\u3089\u308C\u307E\u3057\u305F: ".concat(receiveID));
         cliantId = receiveID;
     });
-
-    socket.on('matchFound', (pairIDs: string[]) => {
-        console.log(`クライアント ${pairIDs[0]} と ${pairIDs[1]} がマッチしました`);
+    socket.on('matchFound', function (pairIDs) {
+        console.log("\u30AF\u30E9\u30A4\u30A2\u30F3\u30C8 ".concat(pairIDs[0], " \u3068 ").concat(pairIDs[1], " \u304C\u30DE\u30C3\u30C1\u3057\u307E\u3057\u305F"));
         //cliantIdと等しくないものがpairID
-        if (cliantId === pairIDs[0]) pairID = pairIDs[1];
-        else pairID = pairIDs[0];
+        if (cliantId === pairIDs[0])
+            pairID = pairIDs[1];
+        else
+            pairID = pairIDs[0];
     });
-}
-
-
+};
 /*
 let _clientId: string;
 let _partnerId: string;
@@ -50,7 +45,6 @@ _startConnectionButton = _startConnectionButton_raw;
 _sendMessageButton = _sendMessageButton_raw;
 _connectingMessage = _connectingMessage_raw;
 */
-
 /*
 window.onload = () => {
     // サーバーに接続
@@ -63,7 +57,6 @@ window.onload = () => {
     });
 }
 */
-
 /*
 // サーバーからのIDを受信
 socket.on('assignId', (clientId: string) => {
@@ -134,4 +127,4 @@ socket.on('endSession', () => {
     }
 
 });
-*/
+*/ 

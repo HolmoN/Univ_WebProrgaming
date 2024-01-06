@@ -9,7 +9,10 @@ const io = socketIO(server);
 
 const sqlite3 = require('sqlite3').verbose();
 
-// 各ページのルーティング
+///----------
+/// ルーティング処理
+///----------
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
@@ -24,13 +27,51 @@ app.get('/titlescene', (req, res) => {
   res.sendFile('index.html', { root: path.join(__dirname, 'public/titlescene') });
 });
 
-io.on('connection', (socket) => {
-  console.log('クライアントが接続しました');
 
-  //sql保存のイベントを受け取る
+///----------
+/// 1クライアントの動作
+///----------
+
+io.on('connection', (socket) => {
+
+  /// =====================================
+  /// === クライアントが接続したときの処理 ===
+  /// =====================================
+
+  // クライアントに一意のIDを割り当てる
+  const clientId = socket.id;
+  console.log(`クライアント ${clientId} が接続しました`);
+  socket.emit('assignId', clientId); //!
+
+  /// ==============================
+  /// === マッチングリクエスト処理 ===
+  /// ==============================
+
+  socket.on('matchingRequest', async () => { //!
+    //マッチングキューに追加
+    AddToQueue(socket.id);
+    //ログを出力
+    console.log(`クライアント ${clientId} がマッチングキューに追加されました`);
+  });
+
+  /// ================================
+  /// === マッチングタイムアウト処理 ===
+  /// ================================
+
+  socket.on('matchingTimeout', async () => { //!
+    //マッチングキューから削除
+    RemoveFromQueue(socket.id);
+    //ログを出力
+    console.log(`クライアント ${clientId} がマッチングキューから削除されました`);
+  });
+
+  /// ======================
+  /// === SQL保存イベント ===
+  /// ======================
+
   socket.on('sqlSave', (day, name, score) => {
     console.log("SQLリクエストを受け取りました");
-  
+
     //データベースに接続
     var db = new sqlite3.Database(path.join(__dirname, 'public', 'sql', 'scoreData.sqlite'));
     //データベースに保存する
@@ -40,17 +81,101 @@ io.on('connection', (socket) => {
       stmt.finalize();
     });
     db.close();
-  
+
     console.log("SQLリクエエスト処理が正常に完了しました");
   });
 });
+
+///----------
+///定数
+///----------
+
+const MAX_PLAYERS_IN_MATCH = 2; //マッチング処理をするのに必要な最低プレイヤー数
+
+///----------
+/// メンバ変数
+///----------
+
+let waitingPlayers = ["string"]; //マッチングキュー
+
+///----------
+/// メソッド
+///----------
+
+//マッチングキューに追加する
+function AddToQueue(playerId) {
+  waitingPlayers.push(playerId);
+}
+
+//マッチングキューから削除する
+function RemoveFromQueue(playerId) {
+  const index = waitingPlayers.indexOf(playerId);
+  if (index >= 0) {
+    waitingPlayers.splice(index, 1);
+  }
+}
+
+//マッチング処理
+function MatchPlayers() {
+  if (waitingPlayers.length >= MAX_PLAYERS_IN_MATCH) {
+    //マッチング相手を取り出す
+    const matchedPlayers = waitingPlayers.splice(0, MAX_PLAYERS_IN_MATCH);
+    
+    //マッチング相手を送信
+    matchedPlayers.forEach(playerId => {
+      const playerSocket = io.sockets.sockets.get(playerId);
+      playerSocket.emit('matchFound', matchedPlayers); //!
+    });
+
+    //ログを出力
+    console.log(`クライアント ${matchedPlayers[0]} と ${matchedPlayers[1]} がマッチしました`);
+  }
+}
+
+//tick処理
+async function Tick() {
+  while (true) {
+    MatchPlayers(); //マッチング処理
+
+    console.log(waitingPlayers);
+    
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+}
+
+///----------
+/// 実行処理
+///----------
 
 const PORT = 3000;
 //サーバーが起動したときに処理される
 server.listen(3000, () => {
   console.log('サーバーがポート3000で起動しました');
   app.use(express.static(path.join(__dirname, 'public')));
+
+  //waitingPlayersの初期化
+  waitingPlayers = [];
+
+  //tick処理の起動
+  Tick();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
