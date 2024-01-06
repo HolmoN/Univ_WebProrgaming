@@ -22,7 +22,7 @@ export class GameCall implements IGameCall {
             this._readyImageElement.style.visibility = 'hidden';
         }
         else {
-
+            this._readyImageElement.style.visibility = 'visible';
         }
     }
 
@@ -34,7 +34,7 @@ export class GameCall implements IGameCall {
             this._startImageElement.style.visibility = 'hidden';
         }
         else {
-
+            this._startImageElement.style.visibility = 'visible';
         }
 
     }
@@ -47,7 +47,7 @@ export class GameCall implements IGameCall {
             this._finishImageElement.style.visibility = 'hidden';
         }
         else {
-
+            this._finishImageElement.style.visibility = 'visible';
         }
 
     }
@@ -58,6 +58,8 @@ export class GameCall implements IGameCall {
      */
     DisplayWL(display: boolean, rightWin: boolean): void {
         if(display){
+            this._rightImageElement.style.visibility = 'visible';
+            this._leftImageElement.style.visibility = 'visible';
             if(!rightWin){
                 
                 this._rightImageElement.src = 'img_win.png';
