@@ -1,4 +1,4 @@
-import { GameCall } from "./GameCall";
+import { GameCall } from "../../src/GameCall";
 window.onload = () =>
 {
    let testcall = new GameCall();
