@@ -54,8 +54,8 @@
             <?php
             // SQLiteデータベースに接続
             $db = new PDO("sqlite:test_ranking.sqlite");
-            
-            $rows = $db->query("SELECT * FROM ranking order by score DESC");
+            $day = date("Y-m-d");
+            $rows = $db->query("SELECT * FROM ranking WHERE day = '$day' order by score DESC");
             $i = 0;
            
             
