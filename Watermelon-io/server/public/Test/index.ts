@@ -23,11 +23,38 @@ window.onload = () => {
         cliantId = receiveID;
     });
 
-    socket.on('matchFound', (pairIDs: string[]) => {
+    socket.on('matchFound', async (pairIDs: string[], isParent: boolean) => {
         console.log(`クライアント ${pairIDs[0]} と ${pairIDs[1]} がマッチしました`);
         //cliantIdと等しくないものがpairID
         if (cliantId === pairIDs[0]) pairID = pairIDs[1];
         else pairID = pairIDs[0];
+
+        //親か子かをログに出力
+        if (isParent) console.log(`あなたは親です`);
+
+        await new Promise(_ => setTimeout(_, 1000));
+        
+        //ゲーム開始の準備が出来たら実行
+        //親だった場合、ゲームスタートの信号を送る
+        if(isParent) socket.emit('sendParentReady', pairID);
+    });
+
+    //子だった場合、親からの信号を受け取り次第、ゲームスタートの信号を送る
+    socket.on('receiveParentReady', () => {
+        
+        //ゲーム開始の準備が出来たら実行
+        socket.emit('sendChildReady', pairID);
+    });
+
+    //ゲーム開始の信号を受け取る
+    socket.on('gameStart', async () => {
+        console.log('3');
+        await new Promise(_ => setTimeout(_, 1000));
+        console.log('2');
+        await new Promise(_ => setTimeout(_, 1000));
+        console.log('1');
+        await new Promise(_ => setTimeout(_, 1000));
+        console.log('スタート！');
     });
 }
 

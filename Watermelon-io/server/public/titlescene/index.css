@@ -60,3 +60,32 @@ body {
 .hidden {
     display: none;
 }
+
+.matched {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: 300px;
+    height: 200px;
+    z-index: 1000;
+    /* 前面に表示するためにz-indexを設定 */
+
+    background-color: #fff;
+    border: 1px solid #ccc;
+
+    padding: 20px;
+    border-radius: 5px;
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    background-image: url("./image/panel.png");
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0);
+    /* 背景色と透明度を調整 */
+}
+
+.matched h2 {
+
+    text-align: center;
+}

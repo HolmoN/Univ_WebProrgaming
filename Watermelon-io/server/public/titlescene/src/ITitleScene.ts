@@ -13,4 +13,6 @@ export interface ITitleScene{
      * マッチングしたかどうかの結果を受け取る
      */
     Matched(matched :boolean) :void;
+
+    ChangePage(url :string) :void;
 }

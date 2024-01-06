@@ -14,7 +14,7 @@ output: {
     filename: "index.js"  
 
 },
-/*/
+*/
 //==========Test==========//
 entry: './server/public/Test/index.ts',
 output: {
@@ -23,7 +23,7 @@ output: {
     filename: "index.js"  
 
 },
-/*/
+/*
 //==========Title==========//
 entry: './server/public/titlescene/index.ts',
 output: {

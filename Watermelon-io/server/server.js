@@ -41,13 +41,13 @@ io.on('connection', (socket) => {
   // クライアントに一意のIDを割り当てる
   const clientId = socket.id;
   console.log(`クライアント ${clientId} が接続しました`);
-  socket.emit('assignId', clientId); //!
+  socket.emit('assignId', clientId); 
 
   /// ==============================
   /// === マッチングリクエスト処理 ===
   /// ==============================
 
-  socket.on('matchingRequest', async () => { //!
+  socket.on('matchingRequest', () => { !
     //マッチングキューに追加
     AddToQueue(socket.id);
     //ログを出力
@@ -58,11 +58,29 @@ io.on('connection', (socket) => {
   /// === マッチングタイムアウト処理 ===
   /// ================================
 
-  socket.on('matchingTimeout', async () => { //!
+  socket.on('matchingTimeout', () => { 
     //マッチングキューから削除
     RemoveFromQueue(socket.id);
     //ログを出力
     console.log(`クライアント ${clientId} がマッチングキューから削除されました`);
+  });
+
+  /// ===========================
+  /// === Parentの準備完了報告 ===
+  /// ===========================
+  socket.on('sendParentReady', (childID) => { //!
+    const childSocket = io.sockets.sockets.get(childID);
+    childSocket.emit('receiveParentReady'); //!
+  });
+
+  /// ==========================
+  /// === Childの準備完了報告 ===
+  /// ==========================
+  socket.on('sendChildReady', (parentID) => { //!
+    const parentSocket = io.sockets.sockets.get(parentID);
+    
+    socket.emit('gameStart'); //!
+    parentSocket.emit('gameStart');
   });
 
   /// ======================
@@ -121,11 +139,10 @@ function MatchPlayers() {
     //マッチング相手を取り出す
     const matchedPlayers = waitingPlayers.splice(0, MAX_PLAYERS_IN_MATCH);
     
-    //マッチング相手を送信
-    matchedPlayers.forEach(playerId => {
-      const playerSocket = io.sockets.sockets.get(playerId);
-      playerSocket.emit('matchFound', matchedPlayers); //!
-    });
+    for(let i = 0; i < matchedPlayers.length; i++){
+      const playerSocket = io.sockets.sockets.get(matchedPlayers[i]);
+      playerSocket.emit('matchFound', matchedPlayers, i); 
+    }
 
     //ログを出力
     console.log(`クライアント ${matchedPlayers[0]} と ${matchedPlayers[1]} がマッチしました`);
@@ -139,7 +156,7 @@ async function Tick() {
 
     console.log(waitingPlayers);
     
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(_ => setTimeout(_, 1000));
   }
 }
 
