@@ -5,7 +5,7 @@ module.exports = {
 // development に設定するとソースマップ有効でJSファイルが出力される
 mode: 'development', // "production" | "development" | "none"
 
-/* 
+///* 
 //==========GameScene==========//
 entry: './server/public/gamescene/src/index.ts',
 output: {
@@ -14,7 +14,7 @@ output: {
     filename: "index.js"  
 
 },
-*/
+//*/
 /*
 //==========Test==========//
 entry: './server/public/Test/index.ts',
@@ -34,7 +34,7 @@ output: {
     filename: "index.js"
 },
 */
-///*
+/*
 //==========Rancking==========//
 entry: './server/public/rancking/index.ts',
 output: {
@@ -42,7 +42,7 @@ output: {
 
     filename: "index.js"
 },
-//*/
+*/
 
 module: {
     rules: [{
