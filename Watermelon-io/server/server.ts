@@ -43,6 +43,26 @@ io.on('connection', (socket) => {
   
     console.log("SQLリクエエスト処理が正常に完了しました");
   });
+
+    /// ======================
+    /// === SQL取得イベント ===
+    /// ======================
+
+    socket.on('requestSQL', () => {
+      console.log("rows");
+      var db = new sqlite3.Database(path.join(__dirname, 'public', 'sql', 'scoreData.sqlite'));
+      var query = "SELECT * FROM scores WHERE DATE(day) = DATE('now') order by score DESC;";
+      db.all(query, (err, rows) => {
+        if (err) {
+          //エラーログを出す
+          console.log(err);
+        } else {
+          // クライアントに結果を送信
+          console.log(rows);
+          socket.emit('queryResult', rows);
+        }
+      });
+    });
 });
 
 const PORT = 3000;
