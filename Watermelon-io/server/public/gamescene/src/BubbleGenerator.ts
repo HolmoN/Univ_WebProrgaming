@@ -13,6 +13,9 @@ import { Bubble_Lv8 } from "./modules/Bubbles/Bubble_Lv8";
 import { Tasks } from "../../src/modules/Tasks";
 import { BubbleController } from "./modules/BubbleController";
 import { Next } from "./Next";
+import { Bubble_Lv9 } from "./modules/Bubbles/Bubble_Lv9";
+import { Bubble_Lv10 } from "./modules/Bubbles/Bubble_Lv10";
+import { Bubble_Lv11 } from "./modules/Bubbles/Bubble_Lv11";
 
 class preController implements IBubbleController {
 
@@ -294,13 +297,13 @@ export class BubbleGenerator {
                 result = new Bubble_Lv8(MatterEnvironment.width / 2, 5);
                 break;
             case 8:
-                result = new Bubble_Lv8(MatterEnvironment.width / 2, 5);
+                result = new Bubble_Lv9(MatterEnvironment.width / 2, 5);
                 break;
             case 9:
-                result = new Bubble_Lv8(MatterEnvironment.width / 2, 5);
+                result = new Bubble_Lv10(MatterEnvironment.width / 2, 5);
                 break;
             case 10:
-                result = new Bubble_Lv8(MatterEnvironment.width / 2, 5);
+                result = new Bubble_Lv11(MatterEnvironment.width / 2, 5);
                 break;
             default:
                 //エラーを吐く
